@@ -92,42 +92,6 @@ Nexora is a modern frontend boilerplate designed to help developers build admin 
 
 ---
 
-## 📁 Project Structure
-
-```text
-src/
-│
-├── app/
-│
-├── assets/
-│
-├── components/
-│   ├── ui/
-│   ├── layouts/
-│   └── shared/
-│
-├── features/
-│   ├── auth/
-│   ├── dashboard/
-│   ├── users/
-│   ├── products/
-│   └── settings/
-│
-├── hooks/
-│
-├── lib/
-│
-├── routes/
-│
-├── services/
-│
-├── types/
-│
-├── utils/
-│
-└── main.tsx
-```
-
 ---
 
 ## 🚀 Getting Started
