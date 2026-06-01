@@ -212,16 +212,3 @@ You can easily customize:
 - Business Platforms
 
 ---
-
-## 📈 Roadmap
-
-- [ ] Multiple Dashboard Variants
-- [ ] Charts Library Integration
-- [ ] Internationalization (i18n)
-- [ ] Role-Based Navigation
-- [ ] Notification Center
-- [ ] Theme Customizer
-- [ ] File Upload Components
-- [ ] Advanced Table Presets
-
----
