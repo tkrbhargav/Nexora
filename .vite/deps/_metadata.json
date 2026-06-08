@@ -1,0 +1,70 @@
+{
+  "hash": "9ef33d44",
+  "configHash": "786ad170",
+  "lockfileHash": "7a79f244",
+  "browserHash": "9e3d07e8",
+  "optimized": {
+    "@tanstack/react-query-devtools": {
+      "src": "../../node_modules/.pnpm/@tanstack+react-query-devto_702a23150e7e3cf8fcfefdc08af081b9/node_modules/@tanstack/react-query-devtools/build/modern/index.js",
+      "file": "@tanstack_react-query-devtools.js",
+      "fileHash": "8fc573ba",
+      "needsInterop": false
+    },
+    "@tanstack/react-query": {
+      "src": "../../node_modules/.pnpm/@tanstack+react-query@5.100.14_react@19.2.7/node_modules/@tanstack/react-query/build/modern/index.js",
+      "file": "@tanstack_react-query.js",
+      "fileHash": "15257734",
+      "needsInterop": false
+    },
+    "react-dom/client": {
+      "src": "../../node_modules/.pnpm/react-dom@19.2.7_react@19.2.7/node_modules/react-dom/client.js",
+      "file": "react-dom_client.js",
+      "fileHash": "4999ccf4",
+      "needsInterop": true
+    },
+    "react-router": {
+      "src": "../../node_modules/.pnpm/react-router@7.16.0_react-d_05db592414511f0861b7ec2c89f32461/node_modules/react-router/dist/development/index.mjs",
+      "file": "react-router.js",
+      "fileHash": "194b3a6c",
+      "needsInterop": false
+    },
+    "react": {
+      "src": "../../node_modules/.pnpm/react@19.2.7/node_modules/react/index.js",
+      "file": "react.js",
+      "fileHash": "0e9360f7",
+      "needsInterop": true
+    },
+    "react/jsx-dev-runtime": {
+      "src": "../../node_modules/.pnpm/react@19.2.7/node_modules/react/jsx-dev-runtime.js",
+      "file": "react_jsx-dev-runtime.js",
+      "fileHash": "7805f32f",
+      "needsInterop": true
+    }
+  },
+  "chunks": {
+    "Q7GRFEEB-C720US2E": {
+      "file": "Q7GRFEEB-C720US2E.js",
+      "isDynamicEntry": false
+    },
+    "S7NCRHOU-CnwnL6CV": {
+      "file": "S7NCRHOU-CnwnL6CV.js",
+      "isDynamicEntry": false
+    },
+    "VKXKX7EQ-DR585YKJ": {
+      "file": "VKXKX7EQ-DR585YKJ.js",
+      "isDynamicEntry": true
+    },
+    "ZUJJ2RGI-8GmvyB0_": {
+      "file": "ZUJJ2RGI-8GmvyB0_.js",
+      "isDynamicEntry": true
+    },
+    "modern-YuFVg-AM": {
+      "file": "modern-YuFVg-AM.js",
+      "isDynamicEntry": false
+    },
+    "react-C6eahTRi": {
+      "file": "react-C6eahTRi.js",
+      "isDynamicEntry": false
+    }
+  }
+}
