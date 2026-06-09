@@ -1,6 +1,13 @@
+import { lazy } from 'react';
 import { createBrowserRouter } from 'react-router';
 import { ProtectedRoute } from './routes/ProtectedRoute';
 import { AppRoot } from './routes/app/root';
+
+const DashboardPage  = lazy(() => import("./routes/app/admin/dashboard"));
+const InventoryPage  = lazy(() => import("./routes/app/admin/inventory"));
+const Organizations  = lazy(() => import("./routes/app/admin/organization"));
+const UsersPage      = lazy(() => import("./routes/app/admin/users"));
+const ActivityPage   = lazy(() => import("./routes/app/admin/activity"));
 
 export const router = createBrowserRouter([
     {
@@ -19,7 +26,7 @@ export const router = createBrowserRouter([
           children: [
             {
               path: "/",
-              element: <div className="text-xl font-semibold">Dashboard</div>
+              element: <DashboardPage />
             },
             {
               path: "/client/dashboard",
@@ -27,25 +34,24 @@ export const router = createBrowserRouter([
             },
             {
               path: "/organizations",
-              element: <div className="text-xl font-semibold">Organizations</div>
+              element: <Organizations/>
             },
             {
               path: "/inventory",
-              element: <div className="text-xl font-semibold">Inventory</div>
+              element: <InventoryPage />
             },
             {
               path: "/users",
-              element: <div className="text-xl font-semibold">Users</div>
+              element: <UsersPage />
             },
             {
               path: "/activity",
-              element: <div className="text-xl font-semibold">Activity</div>
+              element: <ActivityPage />
             },
             {
               path: "/reports",
               element: <div className="text-xl font-semibold">Reports</div>
             },
-            
           ]
         }
       ]

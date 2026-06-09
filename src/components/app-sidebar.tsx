@@ -13,7 +13,7 @@ import { cn } from "@/lib/utils";
 import { Button } from "./core/button";
 
 const NAV_ITEMS = [
-	{ label: "Dashboard",     to: "/client/dashboard", icon: LayoutDashboard },
+	{ label: "Dashboard",     to: "/", icon: LayoutDashboard },
 	{ label: "Organizations", to: "/organizations",    icon: Building2       },
 	{ label: "Inventory",     to: "/inventory",        icon: Warehouse       },
 	{ label: "Users",         to: "/users",            icon: Users           },
