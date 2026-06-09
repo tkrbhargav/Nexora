@@ -6,7 +6,7 @@ export function AppTopbar() {
 	const [searchFocused, setSearchFocused] = useState(false);
 
 	return (
-		<header className="flex items-center h-16 px-6 border-b border-border bg-background shrink-0 gap-4">
+		<header className="fixed top-0 left-0 right-0 z-50 flex items-center h-16 px-6 border-b border-border bg-background/95 backdrop-blur-sm shrink-0 gap-4">
 
 			{/* ── Left: Logo ── */}
 			<div className="flex items-center gap-2.5 shrink-0">

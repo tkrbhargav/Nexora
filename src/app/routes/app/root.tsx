@@ -1,26 +1,40 @@
-import { useState } from "react";
-import { Outlet } from "react-router";
 import { AppSidebar } from "@/components/app-sidebar";
 import { AppTopbar } from "@/components/app-topbar";
+import { useState } from "react";
+import { Outlet } from "react-router";
+
+// Topbar height in px — keep in sync with the h-16 (64px) in AppTopbar
+const TOPBAR_HEIGHT = 64;
 
 export function AppRoot() {
 	const [collapsed, setCollapsed] = useState(false);
 
+	// Sidebar widths must match the values used in AppSidebar (left: 3 = 12px gap + width)
+	const sidebarWidth = collapsed ? 68 : 220;
+
 	return (
-		<div className="flex h-screen bg-background overflow-hidden">
-			{/* Sidebar */}
-			<AppSidebar collapsed={collapsed} onToggle={() => setCollapsed((c) => !c)} />
+		<div className="min-h-screen bg-background">
+			{/* ── Fixed full-width Topbar ── */}
+			<AppTopbar />
 
-			{/* Main area */}
-			<div className="flex flex-col flex-1 min-w-0 overflow-hidden">
-				{/* Topbar */}
-				<AppTopbar />
+			{/* ── Fixed Sidebar, sitting directly below the topbar ── */}
+			<AppSidebar
+				collapsed={collapsed}
+				onToggle={() => setCollapsed((c) => !c)}
+				topOffset={TOPBAR_HEIGHT}
+			/>
 
-				{/* Page content */}
-				<main className="flex-1 overflow-y-auto p-6">
-					<Outlet />
-				</main>
-			</div>
+			{/* ── Scrollable page content ── */}
+			<main
+				className="overflow-y-auto p-6 transition-all duration-300"
+				style={{
+					paddingTop: `${TOPBAR_HEIGHT + 24}px`,
+					paddingLeft: `${sidebarWidth + 35}px`,
+					minHeight: "100vh",
+				}}
+			>
+				<Outlet />
+			</main>
 		</div>
 	);
 }
