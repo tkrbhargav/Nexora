@@ -1,11 +1,10 @@
 import {
-  Activity,
-  Building2,
-  ChevronLeft,
-  ChevronRight,
-  LayoutDashboard,
-  Users,
-  Warehouse,
+	Building2,
+	ChevronLeft,
+	ChevronRight,
+	LayoutDashboard,
+	Users,
+	Warehouse
 } from "lucide-react";
 import { Link, useLocation } from "react-router";
 
@@ -17,7 +16,7 @@ const NAV_ITEMS = [
 	{ label: "Organizations", to: "/organizations",    icon: Building2       },
 	{ label: "Inventory",     to: "/inventory",        icon: Warehouse       },
 	{ label: "Users",         to: "/users",            icon: Users           },
-	{ label: "Activity",      to: "/activity",         icon: Activity        },
+	
 ] satisfies { label: string; to: string; icon: React.ElementType }[];
 
 interface AppSidebarProps {
@@ -29,7 +28,7 @@ interface AppSidebarProps {
 export function AppSidebar({ collapsed, onToggle, topOffset = 64 }: AppSidebarProps) {
 	const { pathname } = useLocation();
 
-	const sidebarW = collapsed ? 68 : 220;
+	const sidebarW = collapsed ? 68 : 230;
 
 	return (
 		<>
@@ -57,7 +56,7 @@ export function AppSidebar({ collapsed, onToggle, topOffset = 64 }: AppSidebarPr
 									title={collapsed ? label : undefined}
 									className={cn(
 										"group relative flex items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-medium transition-all duration-200",
-										"text-muted-foreground hover:text-foreground hover:bg-primary/15",
+										"text-muted-foreground hover:text-foreground hover:bg-primary/15 mr-3",
 										isActive && "bg-primary text-primary-foreground shadow-md shadow-primary/30 hover:bg-primary hover:text-primary-foreground",
 										collapsed && "justify-center px-0",
 									)}

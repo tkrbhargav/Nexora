@@ -7,7 +7,6 @@ const DashboardPage  = lazy(() => import("./routes/app/admin/dashboard"));
 const InventoryPage  = lazy(() => import("./routes/app/admin/inventory"));
 const Organizations  = lazy(() => import("./routes/app/admin/organization"));
 const UsersPage      = lazy(() => import("./routes/app/admin/users"));
-const ActivityPage   = lazy(() => import("./routes/app/admin/activity"));
 
 export const router = createBrowserRouter([
     {
@@ -43,10 +42,6 @@ export const router = createBrowserRouter([
             {
               path: "/users",
               element: <UsersPage />
-            },
-            {
-              path: "/activity",
-              element: <ActivityPage />
             },
             {
               path: "/reports",

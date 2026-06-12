@@ -29,7 +29,7 @@ export function AppRoot() {
 				className="overflow-y-auto p-6 transition-all duration-300"
 				style={{
 					paddingTop: `${TOPBAR_HEIGHT + 24}px`,
-					paddingLeft: `${sidebarWidth + 35}px`,
+					paddingLeft: `${sidebarWidth + 50}px`,
 					minHeight: "100vh",
 				}}
 			>
