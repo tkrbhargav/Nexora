@@ -12,11 +12,10 @@ import { cn } from "@/lib/utils";
 import { Button } from "./core/button";
 
 const NAV_ITEMS = [
-	{ label: "Dashboard",     to: "/", icon: LayoutDashboard },
-	{ label: "Organizations", to: "/organizations",    icon: Building2       },
-	{ label: "Inventory",     to: "/inventory",        icon: Warehouse       },
-	{ label: "Users",         to: "/users",            icon: Users           },
-	
+	{ label: "Dashboard",     to: "/admin/dashboard",      icon: LayoutDashboard },
+	{ label: "Organizations", to: "/admin/organizations",  icon: Building2       },
+	{ label: "Inventory",     to: "/admin/inventory",      icon: Warehouse       },
+	{ label: "Users",         to: "/admin/users",          icon: Users           },
 ] satisfies { label: string; to: string; icon: React.ElementType }[];
 
 interface AppSidebarProps {
@@ -47,7 +46,11 @@ export function AppSidebar({ collapsed, onToggle, topOffset = 64 }: AppSidebarPr
 					{/* Nav items — scrollable */}
 					<nav className="flex flex-col gap-1 flex-1 overflow-y-auto overflow-x-hidden px-2.5 py-4 scrollbar-none">
 						{NAV_ITEMS.map(({ label, to, icon: Icon }) => {
-							const isActive = pathname === to || pathname.startsWith(to + "/");
+							const isActive =
+								pathname === to ||
+								// Also highlight Dashboard when at /admin (index)
+								(to === "/admin/dashboard" && pathname === "/admin") ||
+								(pathname !== to && pathname.startsWith(to + "/"));
 
 							return (
 								<Link
