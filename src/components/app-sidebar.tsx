@@ -9,7 +9,7 @@ import {
 import { Link, useLocation } from "react-router";
 
 import { cn } from "@/lib/utils";
-import { Button } from "./core/button";
+import { Button } from "@/components/ui/button";
 
 const NAV_ITEMS = [
 	{ label: "Dashboard",     to: "/admin/dashboard",      icon: LayoutDashboard },
@@ -53,36 +53,39 @@ export function AppSidebar({ collapsed, onToggle, topOffset = 64 }: AppSidebarPr
 								(pathname !== to && pathname.startsWith(to + "/"));
 
 							return (
-								<Link
+								<Button
 									key={to}
-									to={to}
+									variant="ghost"
+									asChild
 									title={collapsed ? label : undefined}
 									className={cn(
-										"group relative flex items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-medium transition-all duration-200",
+										"group relative flex items-center justify-start gap-3 rounded-xl px-3 h-auto py-2.5 text-sm font-medium transition-all duration-200",
 										"text-muted-foreground hover:text-foreground hover:bg-primary/15 mr-3",
 										isActive && "bg-primary text-primary-foreground shadow-md shadow-primary/30 hover:bg-primary hover:text-primary-foreground",
 										collapsed && "justify-center px-0",
 									)}
 								>
-									{/* Active glow pill */}
-									{isActive && (
-										<span className="absolute inset-0 rounded-xl bg-primary/20 blur-sm -z-10" />
-									)}
-
-									<Icon
-										size={18}
-										className={cn(
-											"shrink-0 transition-colors",
-											isActive ? "text-primary-foreground" : "text-primary/60 group-hover:text-primary",
+									<Link to={to}>
+										{/* Active glow pill */}
+										{isActive && (
+											<span className="absolute inset-0 rounded-xl bg-primary/20 blur-sm -z-10" />
 										)}
-									/>
 
-									{!collapsed && (
-										<span className="truncate text-[13px] font-medium leading-none">
-											{label}
-										</span>
-									)}
-								</Link>
+										<Icon
+											size={18}
+											className={cn(
+												"shrink-0 transition-colors",
+												isActive ? "text-primary-foreground" : "text-primary/60 group-hover:text-primary",
+											)}
+										/>
+
+										{!collapsed && (
+											<span className="truncate text-[13px] font-medium leading-none">
+												{label}
+											</span>
+										)}
+									</Link>
+								</Button>
 							);
 						})}
 					</nav>
@@ -101,12 +104,13 @@ export function AppSidebar({ collapsed, onToggle, topOffset = 64 }: AppSidebarPr
 			{/* ── Floating collapse toggle — rendered outside aside so it's never clipped ── */}
 			<Button
 				type="button"
+				size="icon"
 				onClick={onToggle}
 				style={{
 					top: topOffset + 28,
 					left: sidebarW + -2,
 				}}
-				className="fixed z-50 flex size-7 items-center justify-center rounded-full bg-primary text-primary-foreground shadow-lg shadow-primary/40 ring-2 ring-background transition-all duration-300 hover:scale-110 hover:shadow-primary/60 hover:bg-primary/90"
+				className="fixed z-50 flex size-7 p-0 items-center justify-center rounded-full bg-primary text-primary-foreground shadow-lg shadow-primary/40 ring-2 ring-background transition-all duration-300 hover:scale-110 hover:shadow-primary/60 hover:bg-primary/90"
 				aria-label={collapsed ? "Expand sidebar" : "Collapse sidebar"}
 			>
 				{collapsed
