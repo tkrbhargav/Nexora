@@ -1,3 +1,4 @@
+import { useTheme } from "@/components/theme-provider";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import {
@@ -9,16 +10,13 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { Input } from "@/components/ui/input";
 import { cn } from "@/lib/utils";
-import { useAppStore } from "@/store";
-import { Bell, ChevronDown, Moon, Search, Sun, Zap } from "lucide-react";
+import { Bell, ChevronDown, Monitor, Moon, Search, Sun, Zap } from "lucide-react";
 import { useState } from "react";
 
 export function AppTopbar() {
 	const [searchFocused, setSearchFocused] = useState(false);
-	const theme = useAppStore((state) => state.theme);
-	const setTheme = useAppStore((state) => state.setTheme);
-
-  console.log("current theme ", theme);
+	const { theme, resolvedTheme, setTheme } = useTheme();
+	const isDark = resolvedTheme === "dark";
 	return (
 		<header className="fixed top-0 left-0 right-0 z-50 flex items-center h-16 px-6 border-b border-border bg-background/95 backdrop-blur-sm shrink-0 gap-4">
 
@@ -66,19 +64,22 @@ export function AppTopbar() {
 				<DropdownMenu>
 					<DropdownMenuTrigger asChild>
 						<Button variant="ghost" size="icon" className="relative size-9 rounded-xl hover:bg-accent transition-colors">
-							<Sun className={cn("h-5 w-5 transition-all text-muted-foreground", theme === "dark" ? "scale-0 -rotate-90 absolute" : "scale-100 rotate-0")} />
-							<Moon className={cn("h-5 w-5 transition-all text-muted-foreground", theme === "dark" ? "scale-100 rotate-0" : "scale-0 rotate-90 absolute")} />
+							<Sun className={cn("h-5 w-5 transition-all duration-300 text-muted-foreground", isDark ? "scale-0 -rotate-90 absolute" : "scale-100 rotate-0")} />
+							<Moon className={cn("h-5 w-5 transition-all duration-300 text-muted-foreground", isDark ? "scale-100 rotate-0" : "scale-0 rotate-90 absolute")} />
 							<span className="sr-only">Toggle theme</span>
 						</Button>
 					</DropdownMenuTrigger>
-					<DropdownMenuContent align="end">
-						<DropdownMenuItem onClick={() => setTheme("light")}>
+					<DropdownMenuContent align="end" className="w-36">
+						<DropdownMenuItem onClick={() => setTheme("light")} className={cn("gap-2", theme === "light" && "text-primary font-medium")}>
+							<Sun size={14} />
 							Light
 						</DropdownMenuItem>
-						<DropdownMenuItem onClick={() => setTheme("dark")}>
+						<DropdownMenuItem onClick={() => setTheme("dark")} className={cn("gap-2", theme === "dark" && "text-primary font-medium")}>
+							<Moon size={14} />
 							Dark
 						</DropdownMenuItem>
-						<DropdownMenuItem onClick={() => setTheme("system")}>
+						<DropdownMenuItem onClick={() => setTheme("system")} className={cn("gap-2", theme === "system" && "text-primary font-medium")}>
+							<Monitor size={14} />
 							System
 						</DropdownMenuItem>
 					</DropdownMenuContent>

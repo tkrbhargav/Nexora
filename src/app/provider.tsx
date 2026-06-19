@@ -7,7 +7,7 @@ import { ReactQueryDevtools } from "@tanstack/react-query-devtools"
 export function AppProvider({children}: {children: React.ReactNode}) {
   const queryClient = new QueryClient()
   return (
-    <ThemeProvider defaultTheme="dark" storageKey="nexora-theme">
+    <ThemeProvider defaultTheme="system" storageKey="nexora-theme">
       <QueryClientProvider client={queryClient}>
         {children}  
         <Toaster richColors position="top-right"/>
