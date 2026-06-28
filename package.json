@@ -39,6 +39,7 @@
     "zustand": "^5.0.14"
   },
   "devDependencies": {
+    "@biomejs/biome": "^2.5.1",
     "@eslint/js": "10",
     "@types/node": "24",
     "@types/react": "19",
@@ -52,6 +53,7 @@
     "prettier-plugin-tailwindcss": "0.8.0",
     "typescript": "~6",
     "typescript-eslint": "8",
-    "vite": "8"
+    "vite": "8",
+    "vite-plugin-svgr": "^5.2.0"
   }
 }
