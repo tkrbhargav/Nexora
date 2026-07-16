@@ -41,6 +41,7 @@
   "devDependencies": {
     "@biomejs/biome": "^2.5.1",
     "@eslint/js": "10",
+    "@tanstack/eslint-plugin-query": "^5.101.2",
     "@types/node": "24",
     "@types/react": "19",
     "@types/react-dom": "19",
