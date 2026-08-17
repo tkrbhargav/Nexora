@@ -9,18 +9,20 @@ import {
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
+import { useLogin } from "@/features/auth/api/login";
 import {
 	type LoginFormData,
 	loginSchema,
 } from "@/features/auth/schemas/loginSchema";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Eye, EyeOff, Lock, Mail, Sparkles } from "lucide-react";
+import { Eye, EyeOff, Loader2, Lock, Mail, Sparkles } from "lucide-react";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { Link } from "react-router";
 
 export function LoginForm() {
 	const [showPassword, setShowPassword] = useState(false);
+	const login = useLogin();
 
 	const {
 		register,
@@ -35,7 +37,7 @@ export function LoginForm() {
 	});
 
 	const onSubmit = (data: LoginFormData) => {
-		console.log("Login submitted successfully:", data);
+		login.mutate(data);
 	};
 
 	return (
@@ -131,9 +133,17 @@ export function LoginForm() {
 						<Field className="mt-2">
 							<Button
 								type="submit"
-								className="w-full h-9 rounded-xl bg-gradient-to-r from-violet-600 to-indigo-600 text-white font-semibold shadow-md shadow-indigo-500/10 hover:shadow-lg hover:shadow-indigo-500/20 hover:brightness-105 active:scale-[0.99] transition-all duration-200 text-xs"
+								disabled={login.isPending}
+								className="w-full h-9 rounded-xl bg-gradient-to-r from-violet-600 to-indigo-600 text-white font-semibold shadow-md shadow-indigo-500/10 hover:shadow-lg hover:shadow-indigo-500/20 hover:brightness-105 active:scale-[0.99] transition-all duration-200 text-xs disabled:opacity-60 disabled:cursor-not-allowed"
 							>
-								Sign In
+								{login.isPending ? (
+									<>
+										<Loader2 className="mr-2 h-4 w-4 animate-spin" />
+										Signing in…
+									</>
+								) : (
+									"Sign In"
+								)}
 							</Button>
 						</Field>
 
