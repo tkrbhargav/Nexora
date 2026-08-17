@@ -1,0 +1,182 @@
+[
+  {
+    "id": "1",
+    "name": "John Doe",
+    "email": "john@example.com",
+    "role": "admin",
+    "status": "active",
+    "type": "service",
+    "createdAt": "2025-01-15T09:30:00Z"
+  },
+  {
+    "id": "2",
+    "name": "Jane Smith",
+    "email": "jane@example.com",
+    "role": "user",
+    "status": "inactive",
+    "type": "retail",
+    "createdAt": "2025-02-03T14:20:00Z"
+  },
+  {
+    "id": "3",
+    "name": "Michael Chen",
+    "email": "michael.chen@example.com",
+    "role": "editor",
+    "status": "active",
+    "type": "service",
+    "createdAt": "2025-02-18T11:45:00Z"
+  },
+  {
+    "id": "4",
+    "name": "Sarah Johnson",
+    "email": "sarah.j@example.com",
+    "role": "admin",
+    "status": "active",
+    "type": "retail",
+    "createdAt": "2025-03-07T08:10:00Z"
+  },
+  {
+    "id": "5",
+    "name": "David Kim",
+    "email": "david.kim@example.com",
+    "role": "user",
+    "status": "active",
+    "type": "service",
+    "createdAt": "2025-03-22T16:55:00Z"
+  },
+  {
+    "id": "6",
+    "name": "Emily Rodriguez",
+    "email": "emily.r@example.com",
+    "role": "editor",
+    "status": "inactive",
+    "type": "retail",
+    "createdAt": "2025-04-10T10:30:00Z"
+  },
+  {
+    "id": "7",
+    "name": "James Wilson",
+    "email": "james.w@example.com",
+    "role": "user",
+    "status": "active",
+    "type": "service",
+    "createdAt": "2025-04-28T13:15:00Z"
+  },
+  {
+    "id": "8",
+    "name": "Olivia Martinez",
+    "email": "olivia.m@example.com",
+    "role": "admin",
+    "status": "active",
+    "type": "retail",
+    "createdAt": "2025-05-14T07:40:00Z"
+  },
+  {
+    "id": "9",
+    "name": "Robert Taylor",
+    "email": "robert.t@example.com",
+    "role": "user",
+    "status": "inactive",
+    "type": "service",
+    "createdAt": "2025-06-01T15:25:00Z"
+  },
+  {
+    "id": "10",
+    "name": "Sophia Anderson",
+    "email": "sophia.a@example.com",
+    "role": "editor",
+    "status": "active",
+    "type": "retail",
+    "createdAt": "2025-06-19T09:50:00Z"
+  },
+  {
+    "id": "11",
+    "name": "William Thomas",
+    "email": "william.t@example.com",
+    "role": "user",
+    "status": "active",
+    "type": "service",
+    "createdAt": "2025-07-05T12:00:00Z"
+  },
+  {
+    "id": "12",
+    "name": "Ava Garcia",
+    "email": "ava.garcia@example.com",
+    "role": "admin",
+    "status": "inactive",
+    "type": "retail",
+    "createdAt": "2025-07-21T17:35:00Z"
+  },
+  {
+    "id": "13",
+    "name": "Ethan Brown",
+    "email": "ethan.b@example.com",
+    "role": "user",
+    "status": "active",
+    "type": "service",
+    "createdAt": "2025-08-08T08:20:00Z"
+  },
+  {
+    "id": "14",
+    "name": "Isabella Lee",
+    "email": "isabella.lee@example.com",
+    "role": "editor",
+    "status": "active",
+    "type": "retail",
+    "createdAt": "2025-08-25T14:10:00Z"
+  },
+  {
+    "id": "15",
+    "name": "Alexander Patel",
+    "email": "alex.patel@example.com",
+    "role": "user",
+    "status": "inactive",
+    "type": "service",
+    "createdAt": "2025-09-12T11:05:00Z"
+  },
+  {
+    "id": "16",
+    "name": "Mia Nguyen",
+    "email": "mia.nguyen@example.com",
+    "role": "admin",
+    "status": "active",
+    "type": "retail",
+    "createdAt": "2025-09-30T06:45:00Z"
+  },
+  {
+    "id": "17",
+    "name": "Benjamin Clark",
+    "email": "ben.clark@example.com",
+    "role": "user",
+    "status": "active",
+    "type": "service",
+    "createdAt": "2025-10-17T18:30:00Z"
+  },
+  {
+    "id": "18",
+    "name": "Charlotte Davis",
+    "email": "charlotte.d@example.com",
+    "role": "editor",
+    "status": "inactive",
+    "type": "retail",
+    "createdAt": "2025-11-04T10:15:00Z"
+  },
+  {
+    "id": "19",
+    "name": "Lucas Rivera",
+    "email": "lucas.r@example.com",
+    "role": "user",
+    "status": "active",
+    "type": "service",
+    "createdAt": "2025-11-22T13:50:00Z"
+  },
+  {
+    "id": "20",
+    "name": "Amelia Scott",
+    "email": "amelia.scott@example.com",
+    "role": "admin",
+    "status": "active",
+    "type": "retail",
+    "createdAt": "2025-12-10T09:00:00Z"
+  }
+]

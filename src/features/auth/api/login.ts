@@ -39,7 +39,6 @@
  * └──────────────────────────────────────────────────────────────────────────┘
  */
 
-import { api } from "@/lib/api-client";
 import { useAppStore } from "@/store";
 import { useMutation } from "@tanstack/react-query";
 import { useNavigate } from "react-router";
@@ -50,34 +49,66 @@ import type { LoginRequest, LoginResponse } from "../types";
 const ADMIN_ROLES = new Set(["super-admin", "admin", "manager"]);
 
 // ─────────────────────────────────────────────────────────────────────────────
-// API Function
+// Mock Credentials
+// ─────────────────────────────────────────────────────────────────────────────
+
+const MOCK_USERS: Record<
+	string,
+	{ password: string; user: LoginResponse["user"]; token: string }
+> = {
+	"admin@gmail.com": {
+		password: "admin@123",
+		user: {
+			id: "1",
+			name: "Admin User",
+			email: "admin@gmail.com",
+			role: "admin",
+		},
+		token: "mock-admin-token-xyz",
+	},
+	"client@gmail.com": {
+		password: "client@123",
+		user: {
+			id: "2",
+			name: "Client User",
+			email: "client@gmail.com",
+			role: "user",
+		},
+		token: "mock-client-token-xyz",
+	},
+};
+
+// ─────────────────────────────────────────────────────────────────────────────
+// API Function (Mocked)
 // ─────────────────────────────────────────────────────────────────────────────
 
 /**
- * Calls the login endpoint and returns the parsed response.
+ * Mock login — validates credentials against hardcoded users above.
  *
- * TODO: Replace "/auth/login" with your backend's actual login route.
- *       Adjust the response mapping if your API wraps data differently.
- *
- * @param credentials - The user's email and password.
- * @returns The user object and auth token.
+ * TODO: Replace with a real API call when your backend is ready:
+ *   const response = await api.post<LoginResponse>("/auth/login", credentials);
+ *   return response.data;
  */
 export async function loginWithCredentials(
 	credentials: LoginRequest,
 ): Promise<LoginResponse> {
-	const response = await api.post<LoginResponse>("/auth/login", credentials);
+	// Simulate network delay
+	await new Promise((resolve) => setTimeout(resolve, 500));
 
-	// ── Response mapping ─────────────────────────────────────────────────
-	// If your API wraps the data (e.g., { data: { user, token } }),
-	// unwrap it here:
-	//   return response.data.data;
-	//
-	// If your API uses different field names:
-	//   return {
-	//     user: response.data.profile,
-	//     token: response.data.access_token,
-	//   };
-	return response.data;
+	const mockUser = MOCK_USERS[credentials.email];
+
+	if (!mockUser || mockUser.password !== credentials.password) {
+		throw {
+			response: {
+				data: { message: "Invalid email or password." },
+			},
+		};
+	}
+
+	return {
+		user: mockUser.user,
+		token: mockUser.token,
+	};
 }
 
 // ─────────────────────────────────────────────────────────────────────────────
