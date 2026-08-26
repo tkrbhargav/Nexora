@@ -1,11 +1,8 @@
 // Type
+export type { InventoryItem } from "./types/inventory.types";
 
-// Schemas
-
-// Queries
+// Columns
+export { getInventoryColumns } from "./columns/inventory-columns";
 
 // Components
-
-// Hooks
-
-// Types
+export { InventoryTable } from "./components/inventory-table";

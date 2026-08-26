@@ -1,0 +1,235 @@
+import { Button } from "@/components/core/button";
+import {
+	Field,
+	FieldError,
+	FieldGroup,
+	FieldLabel,
+} from "@/components/core/field";
+import { Input } from "@/components/core/input";
+import {
+	Select,
+	SelectContent,
+	SelectItem,
+	SelectTrigger,
+	SelectValue,
+} from "@/components/core/select";
+import {
+	Sheet,
+	SheetContent,
+	SheetDescription,
+	SheetFooter,
+	SheetHeader,
+	SheetTitle,
+} from "@/components/core/sheet";
+import {
+	type AddInventoryItemFormData,
+	addInventoryItemSchema,
+} from "@/features/inventory/schemas/inventory-schema";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { Controller, useForm } from "react-hook-form";
+
+type AddInventoryItemFormProps = {
+	open: boolean;
+	onOpenChange: (open: boolean) => void;
+};
+
+export function AddInventoryItemForm({
+	open,
+	onOpenChange,
+}: AddInventoryItemFormProps) {
+	const form = useForm<AddInventoryItemFormData>({
+		resolver: zodResolver(addInventoryItemSchema),
+		defaultValues: {
+			name: "",
+			sku: "",
+			category: undefined,
+			status: undefined,
+			quantity: 0,
+			price: 0,
+		},
+	});
+
+	function onSubmit(data: AddInventoryItemFormData) {
+		console.log("New inventory item:", data);
+		form.reset();
+		onOpenChange(false);
+	}
+
+	return (
+		<Sheet
+			open={open}
+			onOpenChange={(value) => {
+				if (!value) form.reset();
+				onOpenChange(value);
+			}}
+		>
+			<SheetContent>
+				<SheetHeader>
+					<SheetTitle>Add New Inventory Item</SheetTitle>
+					<SheetDescription>
+						Fill in the details below to add a new item to inventory.
+					</SheetDescription>
+				</SheetHeader>
+
+				<form
+					id="add-inventory-form"
+					onSubmit={form.handleSubmit(onSubmit)}
+				>
+					<FieldGroup className="px-4">
+						<Controller
+							name="name"
+							control={form.control}
+							render={({ field, fieldState }) => (
+								<Field data-invalid={fieldState.invalid}>
+									<FieldLabel htmlFor="add-inv-name">Name</FieldLabel>
+									<Input
+										{...field}
+										id="add-inv-name"
+										placeholder="Enter item name"
+										aria-invalid={fieldState.invalid}
+										autoComplete="off"
+									/>
+									{fieldState.invalid && (
+										<FieldError errors={[fieldState.error]} />
+									)}
+								</Field>
+							)}
+						/>
+
+						<Controller
+							name="sku"
+							control={form.control}
+							render={({ field, fieldState }) => (
+								<Field data-invalid={fieldState.invalid}>
+									<FieldLabel htmlFor="add-inv-sku">SKU</FieldLabel>
+									<Input
+										{...field}
+										id="add-inv-sku"
+										placeholder="Enter SKU code"
+										aria-invalid={fieldState.invalid}
+										autoComplete="off"
+									/>
+									{fieldState.invalid && (
+										<FieldError errors={[fieldState.error]} />
+									)}
+								</Field>
+							)}
+						/>
+
+						<Controller
+							name="category"
+							control={form.control}
+							render={({ field, fieldState }) => (
+								<Field data-invalid={fieldState.invalid}>
+									<FieldLabel htmlFor="add-inv-category">Category</FieldLabel>
+									<Select value={field.value} onValueChange={field.onChange}>
+										<SelectTrigger
+											id="add-inv-category"
+											className="w-full"
+											aria-invalid={fieldState.invalid}
+										>
+											<SelectValue placeholder="Select a category" />
+										</SelectTrigger>
+										<SelectContent>
+											<SelectItem value="electronics">Electronics</SelectItem>
+											<SelectItem value="furniture">Furniture</SelectItem>
+											<SelectItem value="clothing">Clothing</SelectItem>
+											<SelectItem value="food">Food</SelectItem>
+											<SelectItem value="tools">Tools</SelectItem>
+										</SelectContent>
+									</Select>
+									{fieldState.invalid && (
+										<FieldError errors={[fieldState.error]} />
+									)}
+								</Field>
+							)}
+						/>
+
+						<Controller
+							name="status"
+							control={form.control}
+							render={({ field, fieldState }) => (
+								<Field data-invalid={fieldState.invalid}>
+									<FieldLabel htmlFor="add-inv-status">Status</FieldLabel>
+									<Select value={field.value} onValueChange={field.onChange}>
+										<SelectTrigger
+											id="add-inv-status"
+											className="w-full"
+											aria-invalid={fieldState.invalid}
+										>
+											<SelectValue placeholder="Select status" />
+										</SelectTrigger>
+										<SelectContent>
+											<SelectItem value="in_stock">In Stock</SelectItem>
+											<SelectItem value="low_stock">Low Stock</SelectItem>
+											<SelectItem value="out_of_stock">Out of Stock</SelectItem>
+										</SelectContent>
+									</Select>
+									{fieldState.invalid && (
+										<FieldError errors={[fieldState.error]} />
+									)}
+								</Field>
+							)}
+						/>
+
+						<Controller
+							name="quantity"
+							control={form.control}
+							render={({ field, fieldState }) => (
+								<Field data-invalid={fieldState.invalid}>
+									<FieldLabel htmlFor="add-inv-quantity">Quantity</FieldLabel>
+									<Input
+										{...field}
+										id="add-inv-quantity"
+										type="number"
+										placeholder="Enter quantity"
+										aria-invalid={fieldState.invalid}
+										autoComplete="off"
+									/>
+									{fieldState.invalid && (
+										<FieldError errors={[fieldState.error]} />
+									)}
+								</Field>
+							)}
+						/>
+
+						<Controller
+							name="price"
+							control={form.control}
+							render={({ field, fieldState }) => (
+								<Field data-invalid={fieldState.invalid}>
+									<FieldLabel htmlFor="add-inv-price">Price ($)</FieldLabel>
+									<Input
+										{...field}
+										id="add-inv-price"
+										type="number"
+										step="0.01"
+										placeholder="Enter price"
+										aria-invalid={fieldState.invalid}
+										autoComplete="off"
+									/>
+									{fieldState.invalid && (
+										<FieldError errors={[fieldState.error]} />
+									)}
+								</Field>
+							)}
+						/>
+					</FieldGroup>
+				</form>
+
+				<SheetFooter>
+					<Button type="submit" form="add-inventory-form">
+						Add Item
+					</Button>
+					<Button
+						type="button"
+						variant="outline"
+						onClick={() => onOpenChange(false)}
+					>
+						Cancel
+					</Button>
+				</SheetFooter>
+			</SheetContent>
+		</Sheet>
+	);
+}
