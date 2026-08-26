@@ -10,6 +10,7 @@ import { DataTable } from "@/components/data-table/data-table";
 import { getUserColumns } from "../columns/user-columns";
 import usersData from "../data/users.json";
 import type { User } from "../types/user.types";
+import { AddUserForm } from "./add-user-form";
 
 export function UserTable() {
 	const [sorting, setSorting] = useState<SortingState>([]);
@@ -24,6 +25,8 @@ export function UserTable() {
 	});
 
 	const [globalFilter, setGlobalFilter] = useState("");
+
+	const [addUserOpen, setAddUserOpen] = useState(false);
 
 	const columns = useMemo(
 		() =>
@@ -46,19 +49,25 @@ export function UserTable() {
 	const users = usersData as User[];
 
 	return (
-		<DataTable
-			columns={columns}
-			data={users}
-			sorting={sorting}
-			onSortingChange={setSorting}
-			columnFilters={columnFilters}
-			onColumnFiltersChange={setColumnFilters}
-			columnVisibility={columnVisibility}
-			onColumnVisibilityChange={setColumnVisibility}
-			pagination={pagination}
-			onPaginationChange={setPagination}
-			globalFilter={globalFilter}
-			onGlobalFilterChange={setGlobalFilter}
-		/>
+		<>
+			<DataTable
+				columns={columns}
+				data={users}
+				sorting={sorting}
+				onSortingChange={setSorting}
+				columnFilters={columnFilters}
+				onColumnFiltersChange={setColumnFilters}
+				columnVisibility={columnVisibility}
+				onColumnVisibilityChange={setColumnVisibility}
+				pagination={pagination}
+				onPaginationChange={setPagination}
+				globalFilter={globalFilter}
+				onGlobalFilterChange={setGlobalFilter}
+				buttonTitle="Add User"
+				onButtonClick={() => setAddUserOpen(true)}
+			/>
+
+			<AddUserForm open={addUserOpen} onOpenChange={setAddUserOpen} />
+		</>
 	);
 }

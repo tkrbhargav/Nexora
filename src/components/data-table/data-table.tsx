@@ -46,6 +46,9 @@ type DataTableProps<TData, TValue> = {
 	manualSorting?: boolean;
 	manualFiltering?: boolean;
 	manualPagination?: boolean;
+
+	buttonTitle?: string;
+	onButtonClick?: () => void;
 };
 
 export function DataTable<TData, TValue>({
@@ -71,6 +74,9 @@ export function DataTable<TData, TValue>({
 	manualSorting = false,
 	manualFiltering = false,
 	manualPagination = false,
+
+	buttonTitle,
+	onButtonClick,
 }: DataTableProps<TData, TValue>) {
 	const table = useReactTable({
 		data,
@@ -140,6 +146,8 @@ export function DataTable<TData, TValue>({
 				table={table}
 				search={globalFilter}
 				onSearchChange={onGlobalFilterChange}
+				buttonTitle={buttonTitle}
+				onButtonClick={onButtonClick}
 			/>
 
 			<div className="rounded-md border">
