@@ -1,11 +1,8 @@
 // Type
+export type { Organization } from "./types/organization.types";
 
-// Schemas
-
-// Queries
+// Columns
+export { getOrganizationColumns } from "./columns/organization-columns";
 
 // Components
-
-// Hooks
-
-// Types
+export { OrganizationTable } from "./components/organization-table";

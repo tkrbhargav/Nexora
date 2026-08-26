@@ -1,0 +1,182 @@
+[
+  {
+    "id": "1",
+    "name": "TechNova Solutions",
+    "email": "contact@technova.com",
+    "industry": "technology",
+    "status": "active",
+    "plan": "enterprise",
+    "createdAt": "2025-01-10T08:00:00Z"
+  },
+  {
+    "id": "2",
+    "name": "MediCare Plus",
+    "email": "info@medicareplus.com",
+    "industry": "healthcare",
+    "status": "active",
+    "plan": "professional",
+    "createdAt": "2025-01-25T10:15:00Z"
+  },
+  {
+    "id": "3",
+    "name": "FinEdge Capital",
+    "email": "hello@finedge.com",
+    "industry": "finance",
+    "status": "active",
+    "plan": "enterprise",
+    "createdAt": "2025-02-08T14:30:00Z"
+  },
+  {
+    "id": "4",
+    "name": "EduSpark Academy",
+    "email": "admin@eduspark.com",
+    "industry": "education",
+    "status": "inactive",
+    "plan": "starter",
+    "createdAt": "2025-02-20T09:45:00Z"
+  },
+  {
+    "id": "5",
+    "name": "RetailHub Global",
+    "email": "support@retailhub.com",
+    "industry": "retail",
+    "status": "active",
+    "plan": "professional",
+    "createdAt": "2025-03-05T11:00:00Z"
+  },
+  {
+    "id": "6",
+    "name": "CloudWave Systems",
+    "email": "sales@cloudwave.io",
+    "industry": "technology",
+    "status": "active",
+    "plan": "enterprise",
+    "createdAt": "2025-03-18T16:20:00Z"
+  },
+  {
+    "id": "7",
+    "name": "HealthFirst Clinics",
+    "email": "reception@healthfirst.com",
+    "industry": "healthcare",
+    "status": "inactive",
+    "plan": "free",
+    "createdAt": "2025-04-02T08:30:00Z"
+  },
+  {
+    "id": "8",
+    "name": "WealthStream Advisors",
+    "email": "info@wealthstream.com",
+    "industry": "finance",
+    "status": "active",
+    "plan": "professional",
+    "createdAt": "2025-04-15T13:10:00Z"
+  },
+  {
+    "id": "9",
+    "name": "BrightMinds Institute",
+    "email": "enroll@brightminds.edu",
+    "industry": "education",
+    "status": "active",
+    "plan": "starter",
+    "createdAt": "2025-05-01T10:00:00Z"
+  },
+  {
+    "id": "10",
+    "name": "ShopEase Marketplace",
+    "email": "partners@shopease.com",
+    "industry": "retail",
+    "status": "active",
+    "plan": "enterprise",
+    "createdAt": "2025-05-20T15:45:00Z"
+  },
+  {
+    "id": "11",
+    "name": "DataPulse Analytics",
+    "email": "team@datapulse.io",
+    "industry": "technology",
+    "status": "active",
+    "plan": "professional",
+    "createdAt": "2025-06-03T09:30:00Z"
+  },
+  {
+    "id": "12",
+    "name": "VitalCare Networks",
+    "email": "admin@vitalcare.net",
+    "industry": "healthcare",
+    "status": "active",
+    "plan": "enterprise",
+    "createdAt": "2025-06-18T12:15:00Z"
+  },
+  {
+    "id": "13",
+    "name": "PrimeLedger Finance",
+    "email": "contact@primeledger.com",
+    "industry": "finance",
+    "status": "inactive",
+    "plan": "starter",
+    "createdAt": "2025-07-07T07:50:00Z"
+  },
+  {
+    "id": "14",
+    "name": "LearnPath Online",
+    "email": "support@learnpath.com",
+    "industry": "education",
+    "status": "active",
+    "plan": "professional",
+    "createdAt": "2025-07-22T14:40:00Z"
+  },
+  {
+    "id": "15",
+    "name": "MegaMart Stores",
+    "email": "ops@megamart.com",
+    "industry": "retail",
+    "status": "active",
+    "plan": "enterprise",
+    "createdAt": "2025-08-05T11:25:00Z"
+  },
+  {
+    "id": "16",
+    "name": "NexGen Software",
+    "email": "hello@nexgensw.com",
+    "industry": "technology",
+    "status": "inactive",
+    "plan": "free",
+    "createdAt": "2025-08-19T16:00:00Z"
+  },
+  {
+    "id": "17",
+    "name": "CureWell Hospitals",
+    "email": "info@curewell.org",
+    "industry": "healthcare",
+    "status": "active",
+    "plan": "professional",
+    "createdAt": "2025-09-03T10:35:00Z"
+  },
+  {
+    "id": "18",
+    "name": "TrustVault Banking",
+    "email": "security@trustvault.com",
+    "industry": "finance",
+    "status": "active",
+    "plan": "enterprise",
+    "createdAt": "2025-09-20T08:50:00Z"
+  },
+  {
+    "id": "19",
+    "name": "SkillForge Training",
+    "email": "courses@skillforge.com",
+    "industry": "education",
+    "status": "active",
+    "plan": "starter",
+    "createdAt": "2025-10-08T13:20:00Z"
+  },
+  {
+    "id": "20",
+    "name": "UrbanStyle Retail",
+    "email": "brand@urbanstyle.com",
+    "industry": "retail",
+    "status": "inactive",
+    "plan": "professional",
+    "createdAt": "2025-10-25T09:15:00Z"
+  }
+]
