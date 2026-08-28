@@ -2,11 +2,11 @@ import { useTheme } from "@/components/theme-provider";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
+	DropdownMenu,
+	DropdownMenuContent,
+	DropdownMenuItem,
+	DropdownMenuSeparator,
+	DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Input } from "@/components/ui/input";
 import { cn } from "@/lib/utils";
@@ -17,18 +17,16 @@ export function AppTopbar() {
 	const [searchFocused, setSearchFocused] = useState(false);
 	const { theme, resolvedTheme, setTheme } = useTheme();
 	const isDark = resolvedTheme === "dark";
+
 	return (
 		<header className="fixed top-0 left-0 right-0 z-50 flex items-center h-16 px-6 border-b border-border bg-background/95 backdrop-blur-sm shrink-0 gap-4">
-
-			{/* ── Left: Logo ── */}
 			<div className="flex items-center gap-2.5 shrink-0">
-				<div className="flex items-center justify-center size-8 rounded-xl bg-primary shadow-lg shadow-primary/30">
+				<div className="flex items-center justify-center size-8 rounded-xl bg-primary">
 					<Zap size={16} className="text-primary-foreground fill-primary-foreground" />
 				</div>
 				<span className="text-xl font-bold tracking-tight font-heading">Nexora</span>
 			</div>
 
-			{/* ── Center: Search ── */}
 			<div className="flex-1 flex justify-center px-4">
 				<div
 					className={cn(
@@ -58,9 +56,7 @@ export function AppTopbar() {
 				</div>
 			</div>
 
-			{/* ── Right: Notifications + Profile ── */}
 			<div className="flex items-center gap-3 shrink-0">
-				{/* Theme toggle */}
 				<DropdownMenu>
 					<DropdownMenuTrigger asChild>
 						<Button variant="ghost" size="icon" className="relative size-9 rounded-xl hover:bg-accent transition-colors">
@@ -84,17 +80,16 @@ export function AppTopbar() {
 						</DropdownMenuItem>
 					</DropdownMenuContent>
 				</DropdownMenu>
+
 				<Button
 					variant="secondary"
 					size="icon"
 					className="relative size-9 rounded-xl hover:bg-accent transition-colors"
 				>
 					<Bell size={18} className="text-muted-foreground" />
-					{/* red dot */}
 					<span className="absolute top-1.5 right-1.5 size-2 rounded-full bg-destructive ring-2 ring-background" />
 				</Button>
 
-				{/* Profile avatar */}
 				<DropdownMenu>
 					<DropdownMenuTrigger asChild>
 						<Button
@@ -102,13 +97,13 @@ export function AppTopbar() {
 							className="flex items-center gap-2 px-2 h-11 rounded-xl hover:bg-accent transition-colors group"
 						>
 							<Avatar className="size-8 ring-2 ring-primary/30">
-								<AvatarFallback className="bg-gradient-to-br from-primary to-purple-500 text-xs font-bold text-white">
-									AD
+								<AvatarFallback className="bg-primary text-xs font-bold text-primary-foreground">
+									BT
 								</AvatarFallback>
 							</Avatar>
 							<div className="hidden sm:flex flex-col items-start leading-none gap-1.5">
-								<span className="text-sm font-medium leading-none">Admin</span>
-								<span className="text-[11px] text-muted-foreground leading-none">admin@nexora.io</span>
+								<span className="text-sm font-medium leading-none">Bhargav Thakar</span>
+								<span className="text-[11px] text-muted-foreground leading-none">Admin</span>
 							</div>
 							<ChevronDown
 								size={14}
