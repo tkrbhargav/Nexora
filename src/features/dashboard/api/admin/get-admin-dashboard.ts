@@ -1,6 +1,7 @@
 import { api } from "@/lib/api-client";
 import { useQuery } from "@tanstack/react-query";
 import { adminDashboard } from "./keys";
+import { type DashboardResponse } from "../../types/dashboard.types";
 
 async function getClientDashboard(): Promise<DashboardResponse> {
 	const { data } = await api.get("/dashboard/summary");

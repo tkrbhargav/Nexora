@@ -182,6 +182,8 @@ export function AddInventoryItemForm({
 										{...field}
 										id="add-inv-quantity"
 										type="number"
+										value={field.value ?? ""}
+										onChange={(e) => field.onChange(e.target.value === "" ? 0 : Number(e.target.value))}
 										placeholder="Enter quantity"
 										aria-invalid={fieldState.invalid}
 										autoComplete="off"
@@ -204,6 +206,8 @@ export function AddInventoryItemForm({
 										id="add-inv-price"
 										type="number"
 										step="0.01"
+										value={field.value ?? ""}
+										onChange={(e) => field.onChange(e.target.value === "" ? 0 : Number(e.target.value))}
 										placeholder="Enter price"
 										aria-invalid={fieldState.invalid}
 										autoComplete="off"

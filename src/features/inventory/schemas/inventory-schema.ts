@@ -12,11 +12,11 @@ export const addInventoryItemSchema = z.object({
 	status: z.enum(["in_stock", "low_stock", "out_of_stock"], {
 		message: "Please select a status.",
 	}),
-	quantity: z.coerce
+	quantity: z
 		.number({ message: "Quantity must be a number." })
 		.int({ message: "Quantity must be a whole number." })
 		.min(0, { message: "Quantity cannot be negative." }),
-	price: z.coerce
+	price: z
 		.number({ message: "Price must be a number." })
 		.min(0, { message: "Price cannot be negative." }),
 });
