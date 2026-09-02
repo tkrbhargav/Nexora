@@ -25,29 +25,55 @@ import {
 	type AddUserFormData,
 	addUserSchema,
 } from "@/features/users/schemas/user-schema";
+import type { User } from "@/features/users/types/user.types";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useEffect } from "react";
 import { Controller, useForm } from "react-hook-form";
 
 type AddUserFormProps = {
 	open: boolean;
 	onOpenChange: (open: boolean) => void;
+	initialData?: User | null;
 };
 
-export function AddUserForm({ open, onOpenChange }: AddUserFormProps) {
+const EMPTY_DEFAULTS: AddUserFormData = {
+	name: "",
+	email: "",
+	role: undefined as unknown as AddUserFormData["role"],
+	status: undefined as unknown as AddUserFormData["status"],
+	type: undefined as unknown as AddUserFormData["type"],
+};
+
+export function AddUserForm({ open, onOpenChange, initialData }: AddUserFormProps) {
+	const isEditMode = !!initialData;
+
 	const form = useForm<AddUserFormData>({
 		resolver: zodResolver(addUserSchema),
-		defaultValues: {
-			name: "",
-			email: "",
-			role: undefined,
-			status: undefined,
-			type: undefined,
-		},
+		defaultValues: EMPTY_DEFAULTS,
 	});
 
+	// Reset form with initial data when opening in edit mode
+	useEffect(() => {
+		if (open && initialData) {
+			form.reset({
+				name: initialData.name,
+				email: initialData.email,
+				role: initialData.role,
+				status: initialData.status,
+				type: initialData.type,
+			});
+		} else if (open && !initialData) {
+			form.reset(EMPTY_DEFAULTS);
+		}
+	}, [open, initialData, form]);
+
 	function onSubmit(data: AddUserFormData) {
-		console.log("New user:", data);
-		form.reset();
+		if (isEditMode) {
+			console.log("Update user:", { id: initialData?.id, ...data });
+		} else {
+			console.log("New user:", data);
+		}
+		form.reset(EMPTY_DEFAULTS);
 		onOpenChange(false);
 	}
 
@@ -55,15 +81,17 @@ export function AddUserForm({ open, onOpenChange }: AddUserFormProps) {
 		<Sheet
 			open={open}
 			onOpenChange={(value) => {
-				if (!value) form.reset();
+				if (!value) form.reset(EMPTY_DEFAULTS);
 				onOpenChange(value);
 			}}
 		>
 			<SheetContent>
 				<SheetHeader>
-					<SheetTitle>Add New User</SheetTitle>
+					<SheetTitle>{isEditMode ? "Edit User" : "Add New User"}</SheetTitle>
 					<SheetDescription>
-						Fill in the details below to create a new user.
+						{isEditMode
+							? "Update the user details below."
+							: "Fill in the details below to create a new user."}
 					</SheetDescription>
 				</SheetHeader>
 
@@ -193,7 +221,7 @@ export function AddUserForm({ open, onOpenChange }: AddUserFormProps) {
 
 				<SheetFooter>
 					<Button type="submit" form="add-user-form">
-						Add User
+						{isEditMode ? "Save Changes" : "Add User"}
 					</Button>
 					<Button
 						type="button"

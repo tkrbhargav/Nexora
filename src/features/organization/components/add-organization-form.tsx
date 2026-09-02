@@ -25,32 +25,59 @@ import {
 	type AddOrganizationFormData,
 	addOrganizationSchema,
 } from "@/features/organization/schemas/organization-schema";
+import type { Organization } from "@/features/organization/types/organization.types";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useEffect } from "react";
 import { Controller, useForm } from "react-hook-form";
 
 type AddOrganizationFormProps = {
 	open: boolean;
 	onOpenChange: (open: boolean) => void;
+	initialData?: Organization | null;
+};
+
+const EMPTY_DEFAULTS: AddOrganizationFormData = {
+	name: "",
+	email: "",
+	industry: undefined as unknown as AddOrganizationFormData["industry"],
+	status: undefined as unknown as AddOrganizationFormData["status"],
+	plan: undefined as unknown as AddOrganizationFormData["plan"],
 };
 
 export function AddOrganizationForm({
 	open,
 	onOpenChange,
+	initialData,
 }: AddOrganizationFormProps) {
+	const isEditMode = !!initialData;
+
 	const form = useForm<AddOrganizationFormData>({
 		resolver: zodResolver(addOrganizationSchema),
-		defaultValues: {
-			name: "",
-			email: "",
-			industry: undefined,
-			status: undefined,
-			plan: undefined,
-		},
+		defaultValues: EMPTY_DEFAULTS,
 	});
 
+	// Reset form with initial data when opening in edit mode
+	useEffect(() => {
+		if (open && initialData) {
+			form.reset({
+				name: initialData.name,
+				email: initialData.email,
+				industry: initialData.industry,
+				status: initialData.status,
+				plan: initialData.plan,
+			});
+		} else if (open && !initialData) {
+			form.reset(EMPTY_DEFAULTS);
+		}
+	}, [open, initialData, form]);
+
 	function onSubmit(data: AddOrganizationFormData) {
-		console.log("New organization:", data);
-		form.reset();
+		if (isEditMode) {
+			console.log("Update organization:", { id: initialData?.id, ...data });
+		} else {
+			console.log("New organization:", data);
+		}
+		form.reset(EMPTY_DEFAULTS);
 		onOpenChange(false);
 	}
 
@@ -58,15 +85,17 @@ export function AddOrganizationForm({
 		<Sheet
 			open={open}
 			onOpenChange={(value) => {
-				if (!value) form.reset();
+				if (!value) form.reset(EMPTY_DEFAULTS);
 				onOpenChange(value);
 			}}
 		>
 			<SheetContent>
 				<SheetHeader>
-					<SheetTitle>Add New Organization</SheetTitle>
+					<SheetTitle>{isEditMode ? "Edit Organization" : "Add New Organization"}</SheetTitle>
 					<SheetDescription>
-						Fill in the details below to create a new organization.
+						{isEditMode
+							? "Update the organization details below."
+							: "Fill in the details below to create a new organization."}
 					</SheetDescription>
 				</SheetHeader>
 
@@ -203,7 +232,7 @@ export function AddOrganizationForm({
 
 				<SheetFooter>
 					<Button type="submit" form="add-organization-form">
-						Add Organization
+						{isEditMode ? "Save Changes" : "Add Organization"}
 					</Button>
 					<Button
 						type="button"
@@ -217,3 +246,4 @@ export function AddOrganizationForm({
 		</Sheet>
 	);
 }
+

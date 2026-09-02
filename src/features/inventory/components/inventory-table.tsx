@@ -26,7 +26,23 @@ export function InventoryTable() {
 
 	const [globalFilter, setGlobalFilter] = useState("");
 
-	const [addItemOpen, setAddItemOpen] = useState(false);
+	const [formOpen, setFormOpen] = useState(false);
+	const [editingItem, setEditingItem] = useState<InventoryItem | null>(null);
+
+	const handleEdit = (item: InventoryItem) => {
+		setEditingItem(item);
+		setFormOpen(true);
+	};
+
+	const handleFormClose = (open: boolean) => {
+		setFormOpen(open);
+		if (!open) setEditingItem(null);
+	};
+
+	const handleAddNew = () => {
+		setEditingItem(null);
+		setFormOpen(true);
+	};
 
 	const columns = useMemo(
 		() =>
@@ -35,9 +51,7 @@ export function InventoryTable() {
 					console.log("View item:", item);
 				},
 
-				onEdit: (item) => {
-					console.log("Edit item:", item);
-				},
+				onEdit: handleEdit,
 
 				onDelete: (item) => {
 					console.log("Delete item:", item);
@@ -64,10 +78,16 @@ export function InventoryTable() {
 				globalFilter={globalFilter}
 				onGlobalFilterChange={setGlobalFilter}
 				buttonTitle="Add Item"
-				onButtonClick={() => setAddItemOpen(true)}
+				onButtonClick={handleAddNew}
+				onRowClick={handleEdit}
 			/>
 
-			<AddInventoryItemForm open={addItemOpen} onOpenChange={setAddItemOpen} />
+			<AddInventoryItemForm
+				open={formOpen}
+				onOpenChange={handleFormClose}
+				initialData={editingItem}
+			/>
 		</>
 	);
 }
+

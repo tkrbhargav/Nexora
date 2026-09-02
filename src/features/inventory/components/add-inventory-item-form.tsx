@@ -25,33 +25,61 @@ import {
 	type AddInventoryItemFormData,
 	addInventoryItemSchema,
 } from "@/features/inventory/schemas/inventory-schema";
+import type { InventoryItem } from "@/features/inventory/types/inventory.types";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useEffect } from "react";
 import { Controller, useForm } from "react-hook-form";
 
 type AddInventoryItemFormProps = {
 	open: boolean;
 	onOpenChange: (open: boolean) => void;
+	initialData?: InventoryItem | null;
+};
+
+const EMPTY_DEFAULTS: AddInventoryItemFormData = {
+	name: "",
+	sku: "",
+	category: undefined as unknown as AddInventoryItemFormData["category"],
+	status: undefined as unknown as AddInventoryItemFormData["status"],
+	quantity: 0,
+	price: 0,
 };
 
 export function AddInventoryItemForm({
 	open,
 	onOpenChange,
+	initialData,
 }: AddInventoryItemFormProps) {
+	const isEditMode = !!initialData;
+
 	const form = useForm<AddInventoryItemFormData>({
 		resolver: zodResolver(addInventoryItemSchema),
-		defaultValues: {
-			name: "",
-			sku: "",
-			category: undefined,
-			status: undefined,
-			quantity: 0,
-			price: 0,
-		},
+		defaultValues: EMPTY_DEFAULTS,
 	});
 
+	// Reset form with initial data when opening in edit mode
+	useEffect(() => {
+		if (open && initialData) {
+			form.reset({
+				name: initialData.name,
+				sku: initialData.sku,
+				category: initialData.category,
+				status: initialData.status,
+				quantity: initialData.quantity,
+				price: initialData.price,
+			});
+		} else if (open && !initialData) {
+			form.reset(EMPTY_DEFAULTS);
+		}
+	}, [open, initialData, form]);
+
 	function onSubmit(data: AddInventoryItemFormData) {
-		console.log("New inventory item:", data);
-		form.reset();
+		if (isEditMode) {
+			console.log("Update inventory item:", { id: initialData?.id, ...data });
+		} else {
+			console.log("New inventory item:", data);
+		}
+		form.reset(EMPTY_DEFAULTS);
 		onOpenChange(false);
 	}
 
@@ -59,15 +87,17 @@ export function AddInventoryItemForm({
 		<Sheet
 			open={open}
 			onOpenChange={(value) => {
-				if (!value) form.reset();
+				if (!value) form.reset(EMPTY_DEFAULTS);
 				onOpenChange(value);
 			}}
 		>
 			<SheetContent>
 				<SheetHeader>
-					<SheetTitle>Add New Inventory Item</SheetTitle>
+					<SheetTitle>{isEditMode ? "Edit Inventory Item" : "Add New Inventory Item"}</SheetTitle>
 					<SheetDescription>
-						Fill in the details below to add a new item to inventory.
+						{isEditMode
+							? "Update the item details below."
+							: "Fill in the details below to add a new item to inventory."}
 					</SheetDescription>
 				</SheetHeader>
 
@@ -223,7 +253,7 @@ export function AddInventoryItemForm({
 
 				<SheetFooter>
 					<Button type="submit" form="add-inventory-form">
-						Add Item
+						{isEditMode ? "Save Changes" : "Add Item"}
 					</Button>
 					<Button
 						type="button"
@@ -237,3 +267,4 @@ export function AddInventoryItemForm({
 		</Sheet>
 	);
 }
+

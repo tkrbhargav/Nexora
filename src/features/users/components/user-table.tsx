@@ -26,7 +26,23 @@ export function UserTable() {
 
 	const [globalFilter, setGlobalFilter] = useState("");
 
-	const [addUserOpen, setAddUserOpen] = useState(false);
+	const [formOpen, setFormOpen] = useState(false);
+	const [editingUser, setEditingUser] = useState<User | null>(null);
+
+	const handleEdit = (user: User) => {
+		setEditingUser(user);
+		setFormOpen(true);
+	};
+
+	const handleFormClose = (open: boolean) => {
+		setFormOpen(open);
+		if (!open) setEditingUser(null);
+	};
+
+	const handleAddNew = () => {
+		setEditingUser(null);
+		setFormOpen(true);
+	};
 
 	const columns = useMemo(
 		() =>
@@ -35,9 +51,7 @@ export function UserTable() {
 					console.log("View user:", user);
 				},
 
-				onEdit: (user) => {
-					console.log("Edit user:", user);
-				},
+				onEdit: handleEdit,
 
 				onDelete: (user) => {
 					console.log("Delete user:", user);
@@ -64,10 +78,15 @@ export function UserTable() {
 				globalFilter={globalFilter}
 				onGlobalFilterChange={setGlobalFilter}
 				buttonTitle="Add User"
-				onButtonClick={() => setAddUserOpen(true)}
+				onButtonClick={handleAddNew}
+				onRowClick={handleEdit}
 			/>
 
-			<AddUserForm open={addUserOpen} onOpenChange={setAddUserOpen} />
+			<AddUserForm
+				open={formOpen}
+				onOpenChange={handleFormClose}
+				initialData={editingUser}
+			/>
 		</>
 	);
 }

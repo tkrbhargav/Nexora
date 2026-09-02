@@ -10,13 +10,22 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { Input } from "@/components/ui/input";
 import { cn } from "@/lib/utils";
+import { useAppStore } from "@/store";
 import { Bell, Monitor, Moon, MoreVertical, Search, Sun, Zap } from "lucide-react";
 import { useState } from "react";
+import { useNavigate } from "react-router";
 
 export function AppTopbar() {
 	const [searchFocused, setSearchFocused] = useState(false);
 	const { theme, resolvedTheme, setTheme } = useTheme();
+	const navigate = useNavigate();
+	const clearUser = useAppStore((s) => s.clearUser);
 	const isDark = resolvedTheme === "dark";
+
+	const handleLogout = () => {
+		clearUser();
+		navigate("/login", { replace: true });
+	};
 
 	return (
 		<header className="fixed top-0 left-0 right-0 z-50 flex items-center h-16 px-6 border-b border-border/50 bg-background/80 backdrop-blur-md shrink-0 gap-4">
@@ -107,7 +116,10 @@ export function AppTopbar() {
 						<DropdownMenuItem>Profile</DropdownMenuItem>
 						<DropdownMenuItem>Settings</DropdownMenuItem>
 						<DropdownMenuSeparator />
-						<DropdownMenuItem className="text-destructive focus:bg-destructive/10 focus:text-destructive">
+						<DropdownMenuItem
+							onClick={handleLogout}
+							className="text-destructive focus:bg-destructive/10 focus:text-destructive cursor-pointer"
+						>
 							Logout
 						</DropdownMenuItem>
 					</DropdownMenuContent>

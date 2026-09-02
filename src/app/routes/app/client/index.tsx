@@ -18,6 +18,7 @@ export const clientRoutes: RouteObject = {
         { path: 'inventory',     element: <ClientInventoryPage /> },
         { path: 'organizations', element: <ClientOrganizations /> },
         { path: 'users',         element: <ClientUsersPage />     },
-        { path: 'reports',       element: <div className="text-xl font-semibold">Reports</div> }
+        { path: 'reports',       element: <div className="text-xl font-semibold">Reports</div> },
+        { path: 'settings',      element: <div className="text-xl font-semibold">Settings</div> }
     ],
 };

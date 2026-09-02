@@ -26,7 +26,23 @@ export function OrganizationTable() {
 
 	const [globalFilter, setGlobalFilter] = useState("");
 
-	const [addOrgOpen, setAddOrgOpen] = useState(false);
+	const [formOpen, setFormOpen] = useState(false);
+	const [editingOrg, setEditingOrg] = useState<Organization | null>(null);
+
+	const handleEdit = (organization: Organization) => {
+		setEditingOrg(organization);
+		setFormOpen(true);
+	};
+
+	const handleFormClose = (open: boolean) => {
+		setFormOpen(open);
+		if (!open) setEditingOrg(null);
+	};
+
+	const handleAddNew = () => {
+		setEditingOrg(null);
+		setFormOpen(true);
+	};
 
 	const columns = useMemo(
 		() =>
@@ -35,9 +51,7 @@ export function OrganizationTable() {
 					console.log("View organization:", organization);
 				},
 
-				onEdit: (organization) => {
-					console.log("Edit organization:", organization);
-				},
+				onEdit: handleEdit,
 
 				onDelete: (organization) => {
 					console.log("Delete organization:", organization);
@@ -64,10 +78,16 @@ export function OrganizationTable() {
 				globalFilter={globalFilter}
 				onGlobalFilterChange={setGlobalFilter}
 				buttonTitle="Add Organization"
-				onButtonClick={() => setAddOrgOpen(true)}
+				onButtonClick={handleAddNew}
+				onRowClick={handleEdit}
 			/>
 
-			<AddOrganizationForm open={addOrgOpen} onOpenChange={setAddOrgOpen} />
+			<AddOrganizationForm
+				open={formOpen}
+				onOpenChange={handleFormClose}
+				initialData={editingOrg}
+			/>
 		</>
 	);
 }
+

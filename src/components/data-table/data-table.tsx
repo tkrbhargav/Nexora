@@ -49,6 +49,7 @@ type DataTableProps<TData, TValue> = {
 
 	buttonTitle?: string;
 	onButtonClick?: () => void;
+	onRowClick?: (row: TData) => void;
 };
 
 export function DataTable<TData, TValue>({
@@ -77,6 +78,7 @@ export function DataTable<TData, TValue>({
 
 	buttonTitle,
 	onButtonClick,
+	onRowClick,
 }: DataTableProps<TData, TValue>) {
 	const table = useReactTable({
 		data,
@@ -172,7 +174,11 @@ export function DataTable<TData, TValue>({
 					<TableBody>
 						{table.getRowModel().rows.length ? (
 							table.getRowModel().rows.map((row) => (
-								<TableRow key={row.id}>
+								<TableRow
+									key={row.id}
+									className={onRowClick ? "cursor-pointer" : undefined}
+									onClick={() => onRowClick?.(row.original)}
+								>
 									{row.getVisibleCells().map((cell) => (
 										<TableCell key={cell.id}>
 											{flexRender(

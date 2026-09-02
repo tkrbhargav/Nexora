@@ -3,14 +3,18 @@ import { RevenueChart } from "@/features/dashboard/components/revenue-chart";
 import { SalesChannelChart } from "@/features/dashboard/components/sales-channel-chart";
 import { StatsCards } from "@/features/dashboard/components/stats-cards";
 import { TopProducts } from "@/features/dashboard/components/top-products";
+import { useAppStore } from "@/store";
 
 export default function DashboardPage() {
+	const user = useAppStore((s) => s.user);
+
 	return (
 		<div className="flex flex-col gap-6 ">
 			<div>
 				<h1 className="text-2xl font-bold tracking-tight">Dashboard</h1>
 				<p className="text-sm text-muted-foreground mt-1">
-					Welcome back, Bhargav! Here's what's happening with your business.
+					Welcome back, {user?.name || "Admin"}! Here's what's happening with
+					your business.
 				</p>
 			</div>
 

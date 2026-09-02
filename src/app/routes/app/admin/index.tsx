@@ -16,5 +16,6 @@ export const adminRoutes: RouteObject = {
 		{ path: "inventory", element: <AdminInventoryPage /> },
 		{ path: "organizations", element: <AdminOrganizations /> },
 		{ path: "users", element: <AdminUsersPage /> },
+		{ path: "settings", element: <div className="text-xl font-semibold">Settings</div> },
 	],
 };
