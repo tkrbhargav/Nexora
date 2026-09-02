@@ -1,14 +1,13 @@
 import { Card, CardContent } from "@/components/ui/card";
+import { cn } from "@/lib/utils";
 import {
 	ArrowDownRight,
 	ArrowUpRight,
-	CalendarDays,
 	DollarSign,
 	ShoppingCart,
 	TrendingUp,
 	Users,
 } from "lucide-react";
-import { cn } from "@/lib/utils";
 
 interface StatCardProps {
 	title: string;
@@ -18,7 +17,13 @@ interface StatCardProps {
 	iconClassName: string;
 }
 
-function StatCard({ title, value, change, icon: Icon, iconClassName }: StatCardProps) {
+function StatCard({
+	title,
+	value,
+	change,
+	icon: Icon,
+	iconClassName,
+}: StatCardProps) {
 	const isPositive = change >= 0;
 
 	return (
@@ -33,8 +38,12 @@ function StatCard({ title, value, change, icon: Icon, iconClassName }: StatCardP
 					<Icon size={20} />
 				</div>
 				<div className="flex flex-col gap-1 min-w-0">
-					<span className="text-xs text-muted-foreground font-medium">{title}</span>
-					<span className="text-xl font-bold tracking-tight text-foreground">{value}</span>
+					<span className="text-xs text-muted-foreground font-medium">
+						{title}
+					</span>
+					<span className="text-xl font-bold tracking-tight text-foreground">
+						{value}
+					</span>
 					<div className="flex items-center gap-1.5">
 						{isPositive ? (
 							<ArrowUpRight size={14} className="text-emerald-500" />
@@ -95,11 +104,6 @@ export function StatsCards() {
 				{STATS.map((stat) => (
 					<StatCard key={stat.title} {...stat} />
 				))}
-			</div>
-
-			<div className="hidden xl:flex items-center gap-2 px-4 py-2.5 rounded-xl border border-border bg-card text-sm text-muted-foreground whitespace-nowrap shrink-0">
-				<CalendarDays size={16} className="text-muted-foreground" />
-				<span className="font-medium text-foreground">May 18 - May 24, 2025</span>
 			</div>
 		</div>
 	);

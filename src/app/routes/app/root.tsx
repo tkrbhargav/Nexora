@@ -10,7 +10,7 @@ export function AppRoot() {
 	const [collapsed, setCollapsed] = useState(false);
 
 	/** Must match the width values in AppSidebar */
-	const sidebarWidth = collapsed ? 68 : 220;
+	const sidebarWidth = collapsed ? 68 : 230;
 
 	return (
 		<div className="min-h-screen bg-background">
@@ -24,7 +24,7 @@ export function AppRoot() {
 				className="overflow-y-auto p-6 transition-all duration-300"
 				style={{
 					paddingTop: `${TOPBAR_HEIGHT + 24}px`,
-					paddingLeft: `${sidebarWidth + 50}px`,
+					paddingLeft: `${sidebarWidth + 24}px`,
 					minHeight: "100vh",
 				}}
 			>
@@ -33,3 +33,4 @@ export function AppRoot() {
 		</div>
 	);
 }
+

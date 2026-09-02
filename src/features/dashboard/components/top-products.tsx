@@ -9,10 +9,11 @@ import {
 	TableRow,
 } from "@/components/ui/table";
 import { cn } from "@/lib/utils";
-import { ArrowDownRight, ArrowUpRight } from "lucide-react";
+import { ArrowDownRight, ArrowUpRight, Crown, Layers, HardDrive, Globe, Headset } from "lucide-react";
 
 interface Product {
 	name: string;
+	icon: React.ElementType;
 	iconClassName: string;
 	sales: number;
 	revenue: number;
@@ -22,35 +23,40 @@ interface Product {
 const PRODUCTS: Product[] = [
 	{
 		name: "Premium Plan",
-		iconClassName: "bg-primary/15",
+		icon: Crown,
+		iconClassName: "bg-primary/15 text-primary",
 		sales: 324,
 		revenue: 9720,
 		growth: 18.2,
 	},
 	{
 		name: "Basic Plan",
-		iconClassName: "bg-chart-2/15",
+		icon: Layers,
+		iconClassName: "bg-chart-2/15 text-chart-2",
 		sales: 432,
 		revenue: 6480,
 		growth: 12.5,
 	},
 	{
 		name: "Add-on Storage",
-		iconClassName: "bg-chart-3/15",
+		icon: HardDrive,
+		iconClassName: "bg-chart-3/15 text-chart-3",
 		sales: 265,
 		revenue: 3975,
 		growth: -4.3,
 	},
 	{
 		name: "Custom Domain",
-		iconClassName: "bg-chart-1/15",
+		icon: Globe,
+		iconClassName: "bg-chart-1/15 text-chart-1",
 		sales: 187,
 		revenue: 2805,
 		growth: 8.1,
 	},
 	{
 		name: "Priority Support",
-		iconClassName: "bg-destructive/15",
+		icon: Headset,
+		iconClassName: "bg-destructive/15 text-destructive",
 		sales: 123,
 		revenue: 1845,
 		growth: 15.3,
@@ -82,11 +88,14 @@ export function TopProducts() {
 					<TableBody>
 						{PRODUCTS.map((product) => {
 							const isPositive = product.growth >= 0;
+							const Icon = product.icon;
 							return (
 								<TableRow key={product.name} className="border-border/50">
 									<TableCell>
 										<div className="flex items-center gap-3">
-											<div className={cn("size-8 rounded-lg shrink-0", product.iconClassName)} />
+											<div className={cn("flex items-center justify-center size-8 rounded-lg shrink-0", product.iconClassName)}>
+												<Icon size={16} />
+											</div>
 											<span className="text-sm font-medium text-foreground">{product.name}</span>
 										</div>
 									</TableCell>
