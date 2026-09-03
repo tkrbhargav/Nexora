@@ -1,5 +1,4 @@
 import { useTheme } from "@/components/theme-provider";
-import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import {
 	DropdownMenu,

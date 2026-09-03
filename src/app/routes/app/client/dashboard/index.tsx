@@ -4,19 +4,17 @@ import { SalesChannelChart } from "@/features/dashboard/components/sales-channel
 import { StatsCards } from "@/features/dashboard/components/stats-cards";
 import { TopProducts } from "@/features/dashboard/components/top-products";
 import { useAppStore } from "@/store";
+import { AppBreadCrumb } from "@/components/app-breadcrumb";
 
 export default function DashboardPage() {
 	const user = useAppStore((s) => s.user);
 
 	return (
 		<div className="flex flex-col gap-6 ">
-			<div>
-				<h1 className="text-2xl font-bold tracking-tight">Dashboard</h1>
-				<p className="text-sm text-muted-foreground mt-1">
-					Welcome back, {user?.name || "Client"}! Here's what's happening with
-					your business.
-				</p>
-			</div>
+			<AppBreadCrumb
+				title="Dashboard"
+				description={`Welcome back, ${user?.name || "Client"}! Here's what's happening with your business.`}
+			/>
 
 			<StatsCards />
 

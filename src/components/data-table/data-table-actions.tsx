@@ -23,31 +23,54 @@ export function DataTableActions<TData>({
 	onDelete,
 }: Props<TData>) {
 	return (
-		<DropdownMenu>
-			<DropdownMenuTrigger asChild>
-				<Button variant="ghost" size="icon">
-					<MoreHorizontalIcon className="size-4" />
-				</Button>
-			</DropdownMenuTrigger>
-
-			<DropdownMenuContent align="end">
-				{onView && (
-					<DropdownMenuItem onClick={() => onView(row)}>View</DropdownMenuItem>
-				)}
-
-				{onEdit && (
-					<DropdownMenuItem onClick={() => onEdit(row)}>Edit</DropdownMenuItem>
-				)}
-
-				{onDelete && (
-					<DropdownMenuItem
-						className="text-destructive"
-						onClick={() => onDelete(row)}
+		<div onClick={(e) => e.stopPropagation()}>
+			<DropdownMenu>
+				<DropdownMenuTrigger asChild>
+					<Button
+						variant="ghost"
+						size="icon"
+						onClick={(e) => e.stopPropagation()}
 					>
-						Delete
-					</DropdownMenuItem>
-				)}
-			</DropdownMenuContent>
-		</DropdownMenu>
+						<MoreHorizontalIcon className="size-4" />
+					</Button>
+				</DropdownMenuTrigger>
+
+				<DropdownMenuContent align="end" onClick={(e) => e.stopPropagation()}>
+					{onView && (
+						<DropdownMenuItem
+							onClick={(e) => {
+								e.stopPropagation();
+								onView(row);
+							}}
+						>
+							View
+						</DropdownMenuItem>
+					)}
+
+					{onEdit && (
+						<DropdownMenuItem
+							onClick={(e) => {
+								e.stopPropagation();
+								onEdit(row);
+							}}
+						>
+							Edit
+						</DropdownMenuItem>
+					)}
+
+					{onDelete && (
+						<DropdownMenuItem
+							className="text-destructive"
+							onClick={(e) => {
+								e.stopPropagation();
+								onDelete(row);
+							}}
+						>
+							Delete
+						</DropdownMenuItem>
+					)}
+				</DropdownMenuContent>
+			</DropdownMenu>
+		</div>
 	);
 }

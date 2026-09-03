@@ -1,14 +1,13 @@
 import { OrganizationTable } from "@/features/organization";
+import { AppBreadCrumb } from "@/components/app-breadcrumb";
 
 export default function OrganizationsPage() {
 	return (
 		<div className="space-y-6">
-			<div>
-				<h1 className="text-2xl font-bold tracking-tight">Organizations</h1>
-				<p className="text-muted-foreground">
-					Manage your organizations and their details.
-				</p>
-			</div>
+			<AppBreadCrumb
+				title="Organizations"
+				description="Manage your organizations and their details."
+			/>
 
 			<OrganizationTable />
 		</div>

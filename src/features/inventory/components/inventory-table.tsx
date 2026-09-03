@@ -5,14 +5,22 @@ import type {
 	VisibilityState,
 } from "@tanstack/react-table";
 import { useMemo, useState } from "react";
+import { useNavigate } from "react-router";
 
 import { DataTable } from "@/components/data-table/data-table";
+import { useAppStore } from "@/store";
 import { getInventoryColumns } from "../columns/inventory-columns";
 import inventoryData from "../data/inventory.json";
 import type { InventoryItem } from "../types/inventory.types";
 import { AddInventoryItemForm } from "./add-inventory-item-form";
 
 export function InventoryTable() {
+	const navigate = useNavigate();
+	const currentUser = useAppStore((s) => s.user);
+	const isAdmin = currentUser?.role
+		? ["super-admin", "admin", "manager"].includes(currentUser.role)
+		: window.location.pathname.startsWith("/admin");
+	const basePath = isAdmin ? "/admin" : "";
 	const [sorting, setSorting] = useState<SortingState>([]);
 
 	const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
@@ -48,7 +56,7 @@ export function InventoryTable() {
 		() =>
 			getInventoryColumns({
 				onView: (item) => {
-					console.log("View item:", item);
+					navigate(`${basePath}/inventory/${item.id}`);
 				},
 
 				onEdit: handleEdit,
@@ -79,7 +87,9 @@ export function InventoryTable() {
 				onGlobalFilterChange={setGlobalFilter}
 				buttonTitle="Add Item"
 				onButtonClick={handleAddNew}
-				onRowClick={handleEdit}
+				onRowClick={(item) => {
+					navigate(`${basePath}/inventory/${item.id}`);
+				}}
 			/>
 
 			<AddInventoryItemForm

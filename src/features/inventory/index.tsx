@@ -6,3 +6,4 @@ export { getInventoryColumns } from "./columns/inventory-columns";
 
 // Components
 export { InventoryTable } from "./components/inventory-table";
+export { InventoryDetails } from "./components/inventory-details";

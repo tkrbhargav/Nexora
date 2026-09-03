@@ -5,14 +5,22 @@ import type {
 	VisibilityState,
 } from "@tanstack/react-table";
 import { useMemo, useState } from "react";
+import { useNavigate } from "react-router";
 
 import { DataTable } from "@/components/data-table/data-table";
+import { useAppStore } from "@/store";
 import { getOrganizationColumns } from "../columns/organization-columns";
 import organizationsData from "../data/organizations.json";
 import type { Organization } from "../types/organization.types";
 import { AddOrganizationForm } from "./add-organization-form";
 
 export function OrganizationTable() {
+	const navigate = useNavigate();
+	const currentUser = useAppStore((s) => s.user);
+	const isAdmin = currentUser?.role
+		? ["super-admin", "admin", "manager"].includes(currentUser.role)
+		: window.location.pathname.startsWith("/admin");
+	const basePath = isAdmin ? "/admin" : "";
 	const [sorting, setSorting] = useState<SortingState>([]);
 
 	const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
@@ -48,7 +56,7 @@ export function OrganizationTable() {
 		() =>
 			getOrganizationColumns({
 				onView: (organization) => {
-					console.log("View organization:", organization);
+					navigate(`${basePath}/organizations/${organization.id}`);
 				},
 
 				onEdit: handleEdit,
@@ -79,7 +87,9 @@ export function OrganizationTable() {
 				onGlobalFilterChange={setGlobalFilter}
 				buttonTitle="Add Organization"
 				onButtonClick={handleAddNew}
-				onRowClick={handleEdit}
+				onRowClick={(organization) => {
+					navigate(`${basePath}/organizations/${organization.id}`);
+				}}
 			/>
 
 			<AddOrganizationForm

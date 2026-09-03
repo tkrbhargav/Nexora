@@ -1,14 +1,13 @@
 import { InventoryTable } from "@/features/inventory";
+import { AppBreadCrumb } from "@/components/app-breadcrumb";
 
 export default function InventoryPage() {
 	return (
 		<div className="space-y-6">
-			<div>
-				<h1 className="text-2xl font-bold tracking-tight">Inventory</h1>
-				<p className="text-muted-foreground">
-					Manage your inventory items and stock levels.
-				</p>
-			</div>
+			<AppBreadCrumb
+				title="Inventory"
+				description="Manage your inventory items and stock levels."
+			/>
 
 			<InventoryTable />
 		</div>
