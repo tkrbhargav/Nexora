@@ -30,8 +30,8 @@ export function SettingsPage() {
 	const [currency, setCurrency] = useState("USD ($)");
 	const [language, setLanguage] = useState("English (US)");
 
-	// Security state
-	const [apiKey] = useState("nx_live_994827103847291038472901");
+	// Security state (Sample demo key for UI preview)
+	const [apiKey] = useState("nx_live_demo_key_9948271038472901");
 	const [twoFactorRequired, setTwoFactorRequired] = useState(true);
 	const [sessionTimeout, setSessionTimeout] = useState("60");
 
