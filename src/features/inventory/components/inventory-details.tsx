@@ -1,5 +1,3 @@
-import { useState } from "react";
-import { useNavigate, useParams } from "react-router";
 import { AppBreadCrumb } from "@/components/app-breadcrumb";
 import {
 	AtSign,
@@ -17,6 +15,8 @@ import {
 	Trash2,
 	Warehouse,
 } from "lucide-react";
+import { useState } from "react";
+import { useNavigate, useParams } from "react-router";
 
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -31,6 +31,7 @@ import { cn } from "@/lib/utils";
 import { useAppStore } from "@/store";
 import inventoryData from "../data/inventory.json";
 import type { InventoryItem } from "../types/inventory.types";
+import { AddInventoryItemForm } from "./add-inventory-item-form";
 
 // ─── Helpers ─────────────────────────────────────────────────────────────────
 
@@ -133,6 +134,7 @@ export function InventoryDetails() {
 
 	const [skuCopied, setSkuCopied] = useState(false);
 	const [menuOpen, setMenuOpen] = useState(false);
+	const [editOpen, setEditOpen] = useState(false);
 
 	const handleCopySku = () => {
 		navigator.clipboard.writeText(item.sku);
@@ -177,8 +179,7 @@ export function InventoryDetails() {
 	];
 
 	return (
-		<div className="flex flex-col gap-5 w-full max-w-[1400px] mx-auto pb-10">
-
+		<div className="flex flex-col gap-5 w-full  mx-auto pb-10">
 			{/* ── Header & Breadcrumb ───────────────────────────── */}
 			<AppBreadCrumb
 				title="Inventory Details"
@@ -192,7 +193,9 @@ export function InventoryDetails() {
 						<span className="text-xs text-muted-foreground">View:</span>
 						<select
 							value={item.id}
-							onChange={(e) => navigate(`${basePath}/inventory/${e.target.value}`)}
+							onChange={(e) =>
+								navigate(`${basePath}/inventory/${e.target.value}`)
+							}
 							className="h-8 text-xs rounded-lg bg-card border border-border px-2.5 py-1 text-foreground focus:outline-none focus:ring-1 focus:ring-primary"
 						>
 							{items.map((i) => (
@@ -227,7 +230,12 @@ export function InventoryDetails() {
 										getStatusStyle(item.status),
 									)}
 								>
-									<span className={cn("size-1.5 rounded-full mr-1.5", getStatusDot(item.status))} />
+									<span
+										className={cn(
+											"size-1.5 rounded-full mr-1.5",
+											getStatusDot(item.status),
+										)}
+									/>
 									{getStatusLabel(item.status)}
 								</Badge>
 								<Badge
@@ -262,7 +270,11 @@ export function InventoryDetails() {
 								{skuCopied ? "Copied" : item.sku}
 							</Button>
 
-							<Button size="sm" className="h-8 text-xs gap-1.5 rounded-lg font-medium">
+							<Button
+								size="sm"
+								onClick={() => setEditOpen(true)}
+								className="h-8 text-xs gap-1.5 rounded-lg font-medium cursor-pointer"
+							>
 								<Edit size={13} />
 								Edit
 							</Button>
@@ -349,10 +361,8 @@ export function InventoryDetails() {
 
 			{/* ── Two-column content ────────────────────────────────── */}
 			<div className="grid grid-cols-1 lg:grid-cols-12 gap-5">
-
 				{/* LEFT — Item Info ─────────────────────────────────── */}
 				<div className="lg:col-span-5 xl:col-span-5 flex flex-col gap-5">
-
 					<Card className="gap-0 py-0 ring-1 ring-border">
 						<CardHeader className="px-6 pt-5 pb-0">
 							<CardTitle className="text-base font-semibold text-foreground">
@@ -364,23 +374,15 @@ export function InventoryDetails() {
 								label="Item ID"
 								icon={Hash}
 								value={
-									<span className="font-mono">
-										#{item.id.padStart(4, "0")}
-									</span>
+									<span className="font-mono">#{item.id.padStart(4, "0")}</span>
 								}
 							/>
-							<DetailRow
-								label="Name"
-								icon={Package}
-								value={item.name}
-							/>
+							<DetailRow label="Name" icon={Package} value={item.name} />
 							<DetailRow
 								label="SKU"
 								icon={AtSign}
 								value={
-									<span className="font-mono text-foreground">
-										{item.sku}
-									</span>
+									<span className="font-mono text-foreground">{item.sku}</span>
 								}
 								action={
 									<button
@@ -416,7 +418,12 @@ export function InventoryDetails() {
 											getStatusStyle(item.status),
 										)}
 									>
-										<span className={cn("size-1.5 rounded-full", getStatusDot(item.status))} />
+										<span
+											className={cn(
+												"size-1.5 rounded-full",
+												getStatusDot(item.status),
+											)}
+										/>
 										{getStatusLabel(item.status)}
 									</span>
 								}
@@ -454,7 +461,6 @@ export function InventoryDetails() {
 
 				{/* RIGHT — Stock + Timeline ────────────────────────── */}
 				<div className="lg:col-span-7 xl:col-span-7 flex flex-col gap-5">
-
 					{/* Stock Analysis */}
 					<Card className="gap-0 py-0 ring-1 ring-border">
 						<CardHeader className="px-6 pt-5 pb-0 flex flex-row items-center justify-between">
@@ -492,7 +498,9 @@ export function InventoryDetails() {
 													? "bg-amber-500"
 													: "bg-destructive",
 										)}
-										style={{ width: `${Math.min((item.quantity / 500) * 100, 100)}%` }}
+										style={{
+											width: `${Math.min((item.quantity / 500) * 100, 100)}%`,
+										}}
 									/>
 								</div>
 								<div className="flex items-center justify-between text-xs text-muted-foreground">
@@ -508,7 +516,10 @@ export function InventoryDetails() {
 								</span>
 								{[
 									{ label: "Unit Price", value: `$${item.price.toFixed(2)}` },
-									{ label: "Units in Stock", value: `${item.quantity.toLocaleString()} units` },
+									{
+										label: "Units in Stock",
+										value: `${item.quantity.toLocaleString()} units`,
+									},
 									{
 										label: "Total Inventory Value",
 										value: `$${Number(totalValue).toLocaleString("en-US", { minimumFractionDigits: 2 })}`,
@@ -519,7 +530,9 @@ export function InventoryDetails() {
 										key={label}
 										className="flex items-center justify-between py-2 border-b border-border/30 last:border-0"
 									>
-										<span className="text-sm text-muted-foreground">{label}</span>
+										<span className="text-sm text-muted-foreground">
+											{label}
+										</span>
 										<span
 											className={cn(
 												"text-sm font-semibold",
@@ -620,7 +633,10 @@ export function InventoryDetails() {
 											item.category.charAt(0).toUpperCase() +
 											item.category.slice(1),
 									},
-									{ label: "Total Value", value: `$${Number(totalValue).toLocaleString("en-US", { minimumFractionDigits: 2 })}` },
+									{
+										label: "Total Value",
+										value: `$${Number(totalValue).toLocaleString("en-US", { minimumFractionDigits: 2 })}`,
+									},
 								].map(({ label, value }) => (
 									<div
 										key={label}
@@ -639,6 +655,12 @@ export function InventoryDetails() {
 					</Card>
 				</div>
 			</div>
+
+			<AddInventoryItemForm
+				open={editOpen}
+				onOpenChange={setEditOpen}
+				initialData={item}
+			/>
 		</div>
 	);
 }

@@ -112,8 +112,14 @@ export function AppTopbar() {
 						</Button>
 					</DropdownMenuTrigger>
 					<DropdownMenuContent align="end" className="w-48">
-						<DropdownMenuItem>Profile</DropdownMenuItem>
-						<DropdownMenuItem>Settings</DropdownMenuItem>
+						<DropdownMenuItem onClick={() => {
+							const isAdminPath = window.location.pathname.startsWith("/admin");
+							navigate(isAdminPath ? "/admin/profile" : "/profile");
+						}}>Profile</DropdownMenuItem>
+						<DropdownMenuItem onClick={() => {
+							const isAdminPath = window.location.pathname.startsWith("/admin");
+							navigate(isAdminPath ? "/admin/settings" : "/settings");
+						}}>Settings</DropdownMenuItem>
 						<DropdownMenuSeparator />
 						<DropdownMenuItem
 							onClick={handleLogout}

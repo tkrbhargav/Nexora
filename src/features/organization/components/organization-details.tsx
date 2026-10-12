@@ -32,6 +32,7 @@ import { cn } from "@/lib/utils";
 import { useAppStore } from "@/store";
 import organizationsData from "../data/organizations.json";
 import type { Organization } from "../types/organization.types";
+import { AddOrganizationForm } from "./add-organization-form";
 
 // ─── Helpers ─────────────────────────────────────────────────────────────────
 
@@ -151,6 +152,7 @@ export function OrganizationDetails() {
 
 	const [emailCopied, setEmailCopied] = useState(false);
 	const [menuOpen, setMenuOpen] = useState(false);
+	const [editOpen, setEditOpen] = useState(false);
 
 	const handleCopyEmail = () => {
 		navigator.clipboard.writeText(org.email);
@@ -202,7 +204,7 @@ export function OrganizationDetails() {
 	];
 
 	return (
-		<div className="flex flex-col gap-5 w-full max-w-[1400px] mx-auto pb-10">
+		<div className="flex flex-col gap-5 w-full   mx-auto pb-10">
 			{/* ── Header & Breadcrumb ───────────────────────────── */}
 			<AppBreadCrumb
 				title="Organization Details"
@@ -306,7 +308,8 @@ export function OrganizationDetails() {
 
 							<Button
 								size="sm"
-								className="h-8 text-xs gap-1.5 rounded-lg font-medium"
+								onClick={() => setEditOpen(true)}
+								className="h-8 text-xs gap-1.5 rounded-lg font-medium cursor-pointer"
 							>
 								<Edit size={13} />
 								Edit
@@ -680,6 +683,12 @@ export function OrganizationDetails() {
 					</Card>
 				</div>
 			</div>
+
+			<AddOrganizationForm
+				open={editOpen}
+				onOpenChange={setEditOpen}
+				initialData={org}
+			/>
 		</div>
 	);
 }

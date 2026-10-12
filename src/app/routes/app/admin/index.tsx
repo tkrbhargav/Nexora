@@ -9,6 +9,9 @@ const AdminOrganizations = lazy(() => import("./organization"));
 const AdminOrganizationDetailsPage = lazy(() => import("./organization/details"));
 const AdminUsersPage = lazy(() => import("./users"));
 const AdminUserDetailsPage = lazy(() => import("./users/details"));
+const AdminProfilePage = lazy(() => import("./profile"));
+const AdminSettingsPage = lazy(() => import("./settings"));
+const AdminReportsPage = lazy(() => import("./reports"));
 
 export const adminRoutes: RouteObject = {
 	path: "admin",
@@ -22,6 +25,8 @@ export const adminRoutes: RouteObject = {
 		{ path: "organizations/:orgId",     element: <AdminOrganizationDetailsPage /> },
 		{ path: "users",                    element: <AdminUsersPage /> },
 		{ path: "users/:userId",            element: <AdminUserDetailsPage /> },
-		{ path: "settings",                 element: <div className="text-xl font-semibold">Settings</div> },
+		{ path: "profile",                  element: <AdminProfilePage /> },
+		{ path: "reports",                  element: <AdminReportsPage /> },
+		{ path: "settings",                 element: <AdminSettingsPage /> },
 	],
 };

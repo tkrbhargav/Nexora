@@ -34,6 +34,7 @@ import { cn } from "@/lib/utils";
 import { useAppStore } from "@/store";
 import usersData from "../data/users.json";
 import type { User } from "../types/user.types";
+import { AddUserForm } from "./add-user-form";
 
 // ─── Helpers ─────────────────────────────────────────────────────────────────
 
@@ -128,6 +129,7 @@ export function UserDetails() {
 	const [idCopied, setIdCopied] = useState(false);
 	const [emailCopied, setEmailCopied] = useState(false);
 	const [menuOpen, setMenuOpen] = useState(false);
+	const [editOpen, setEditOpen] = useState(false);
 
 	const handleCopyId = () => {
 		navigator.clipboard.writeText(user.id);
@@ -152,7 +154,7 @@ export function UserDetails() {
 	const months = monthsAgo(user.createdAt);
 
 	return (
-		<div className="flex flex-col gap-5 w-full max-w-[1400px] mx-auto pb-10">
+		<div className="flex flex-col gap-5 w-full   mx-auto pb-10">
 			{/* ── Header & Breadcrumb ───────────────────────────── */}
 			<AppBreadCrumb
 				title="User Details"
@@ -259,7 +261,8 @@ export function UserDetails() {
 
 							<Button
 								size="sm"
-								className="h-8 text-xs gap-1.5 rounded-lg font-medium"
+								onClick={() => setEditOpen(true)}
+								className="h-8 text-xs gap-1.5 rounded-lg font-medium cursor-pointer"
 							>
 								<Edit size={13} />
 								Edit
@@ -737,6 +740,12 @@ export function UserDetails() {
 					</Card>
 				</div>
 			</div>
+
+			<AddUserForm
+				open={editOpen}
+				onOpenChange={setEditOpen}
+				initialData={user}
+			/>
 		</div>
 	);
 }

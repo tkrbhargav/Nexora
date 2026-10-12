@@ -1,4 +1,5 @@
 import {
+	BarChart3,
 	Building2,
 	ChevronLeft,
 	ChevronRight,
@@ -26,6 +27,7 @@ const MAIN_NAV_ITEMS: NavConfigItem[] = [
 	{ label: "Organizations", path: "/organizations", icon: Building2 },
 	{ label: "Inventory", path: "/inventory", icon: Warehouse },
 	{ label: "Users", path: "/users", icon: Users },
+	{ label: "Reports", path: "/reports", icon: BarChart3 },
 ];
 
 const BOTTOM_NAV_ITEMS: NavConfigItem[] = [
@@ -175,10 +177,14 @@ export function AppSidebar({ collapsed, onToggle, topOffset = 64 }: AppSidebarPr
 			<div className="h-px mx-3 bg-sidebar-border" />
 
 			{/* User profile at bottom */}
-			<div className={cn(
-				"flex items-center gap-3 px-3 py-3.5 shrink-0",
-				collapsed && "justify-center px-2",
-			)}>
+			<Link
+				to={`${basePath}/profile`}
+				title={collapsed ? displayName : undefined}
+				className={cn(
+					"flex items-center gap-3 px-3 py-3.5 shrink-0 hover:bg-accent/60 transition-colors cursor-pointer group",
+					collapsed && "justify-center px-2",
+				)}
+			>
 				<Avatar className="size-8 ring-2 ring-primary/25 shrink-0">
 					<AvatarFallback className="bg-primary/15 text-primary text-xs font-bold">
 						{initials}
@@ -187,13 +193,13 @@ export function AppSidebar({ collapsed, onToggle, topOffset = 64 }: AppSidebarPr
 				{!collapsed && (
 					<>
 						<div className="flex flex-col items-start leading-none gap-1 min-w-0">
-							<span className="text-sm font-medium leading-none text-foreground truncate">{displayName}</span>
+							<span className="text-sm font-medium leading-none text-foreground truncate group-hover:text-primary transition-colors">{displayName}</span>
 							<span className="text-[11px] text-muted-foreground leading-none capitalize">{displayRole}</span>
 						</div>
-						<ChevronRight size={14} className="ml-auto shrink-0 text-muted-foreground" />
+						<ChevronRight size={14} className="ml-auto shrink-0 text-muted-foreground group-hover:text-foreground transition-colors" />
 					</>
 				)}
-			</div>
+			</Link>
 		</aside>
 	);
 }
