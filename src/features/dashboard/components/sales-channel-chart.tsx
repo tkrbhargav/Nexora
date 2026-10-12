@@ -1,3 +1,4 @@
+import { Fragment } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Cell, Pie, PieChart, ResponsiveContainer } from "recharts";
@@ -12,22 +13,22 @@ const CHANNEL_DATA = [
 
 export function SalesChannelChart() {
 	return (
-		<Card className="gap-0 py-0 ring-1 ring-border w-full">
-			<CardHeader className="px-6 pt-5 pb-0">
+		<Card className="gap-0 py-0 ring-1 ring-border w-full flex-1 flex flex-col justify-between">
+			<CardHeader className="px-5 pt-5 pb-0">
 				<CardTitle className="text-base font-semibold text-foreground">Sales by Channel</CardTitle>
 			</CardHeader>
 
-			<CardContent className="px-6 pt-4 pb-5 flex flex-col gap-5">
-				<div className="flex items-center gap-6">
-					<div className="relative shrink-0">
-						<ResponsiveContainer width={180} height={180}>
+			<CardContent className="px-5 pt-4 pb-5 flex flex-col gap-5 flex-1 justify-between">
+				<div className="flex flex-col sm:flex-row items-center gap-4 sm:gap-5">
+					<div className="relative shrink-0 size-[140px] flex items-center justify-center">
+						<ResponsiveContainer width={140} height={140}>
 							<PieChart>
 								<Pie
 									data={CHANNEL_DATA}
 									cx="50%"
 									cy="50%"
-									innerRadius={55}
-									outerRadius={80}
+									innerRadius={45}
+									outerRadius={65}
 									paddingAngle={3}
 									dataKey="value"
 									stroke="none"
@@ -39,31 +40,33 @@ export function SalesChannelChart() {
 							</PieChart>
 						</ResponsiveContainer>
 						<div className="absolute inset-0 flex flex-col items-center justify-center pointer-events-none">
-							<span className="text-[11px] text-muted-foreground">Total</span>
-							<span className="text-lg font-bold tracking-tight text-foreground">$24,780</span>
+							<span className="text-[10px] uppercase font-semibold text-muted-foreground tracking-wider">Total</span>
+							<span className="text-base font-bold tracking-tight text-foreground">$24,780</span>
 						</div>
 					</div>
 
-					<div className="flex flex-col gap-2.5 flex-1 min-w-0">
+					<div className="grid grid-cols-[auto_1fr_auto_auto] items-center gap-x-2.5 gap-y-2 w-full sm:flex-1 min-w-0 text-xs">
 						{CHANNEL_DATA.map((item) => (
-							<div key={item.name} className="flex items-center gap-3 text-sm">
-								<div
-									className="size-3 rounded-full shrink-0"
+							<Fragment key={item.name}>
+								<span
+									className="size-2.5 rounded-full shrink-0"
 									style={{ backgroundColor: item.color }}
 								/>
-								<span className="text-foreground font-medium min-w-[90px] truncate">
+								<span className="text-foreground font-medium truncate">
 									{item.name}
 								</span>
-								<span className="text-muted-foreground text-xs ml-auto">{item.percentage}%</span>
-								<span className="text-foreground font-medium text-xs tabular-nums w-[72px] text-right">
-									${item.value.toLocaleString("en-US", { minimumFractionDigits: 2 })}
+								<span className="text-muted-foreground text-right tabular-nums pl-1">
+									{item.percentage}%
 								</span>
-							</div>
+								<span className="text-foreground font-semibold tabular-nums text-right pl-2">
+									${item.value.toLocaleString("en-US")}
+								</span>
+							</Fragment>
 						))}
 					</div>
 				</div>
 
-				<Button variant="outline" className="w-fit text-sm">
+				<Button variant="outline" size="sm" className="w-fit text-xs h-8">
 					View full report
 				</Button>
 			</CardContent>
