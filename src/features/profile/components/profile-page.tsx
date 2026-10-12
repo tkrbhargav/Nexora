@@ -68,7 +68,6 @@ const PROFILE_DATA = {
 
 type ProfileRole = "admin" | "editor" | "user";
 type ProfileStatus = "active" | "inactive";
-type ProfileType = "service" | "retail";
 
 // ─── Helpers ─────────────────────────────────────────────────────────────────
 

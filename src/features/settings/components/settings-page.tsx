@@ -6,13 +6,10 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Badge } from "@/components/ui/badge";
 import {
 	Bell,
 	Check,
 	Globe,
-	Key,
-	Lock,
 	Moon,
 	Palette,
 	Shield,
@@ -20,7 +17,6 @@ import {
 	Sun,
 	Copy,
 	Save,
-	Zap,
 } from "lucide-react";
 
 export function SettingsPage() {
@@ -257,6 +253,23 @@ export function SettingsPage() {
 										<option value="120">120 minutes (2 hours)</option>
 									</select>
 								</div>
+							</div>
+
+							{/* Two Factor Authentication */}
+							<div className="flex items-center justify-between p-3.5 rounded-lg border border-border/60 bg-muted/20">
+								<div className="space-y-0.5">
+									<p className="text-sm font-medium text-foreground">Enforce Two-Factor Authentication (2FA)</p>
+									<p className="text-xs text-muted-foreground">Require an authenticator app code on login for all administrative accounts.</p>
+								</div>
+								<Button
+									type="button"
+									variant={twoFactorRequired ? "default" : "outline"}
+									size="sm"
+									onClick={() => setTwoFactorRequired(!twoFactorRequired)}
+									className="h-8 text-xs font-semibold px-3 rounded-lg shrink-0"
+								>
+									{twoFactorRequired ? "Enforced" : "Optional"}
+								</Button>
 							</div>
 						</CardContent>
 					</Card>

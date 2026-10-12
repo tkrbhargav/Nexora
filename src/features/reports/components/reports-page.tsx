@@ -2,7 +2,6 @@ import { useState } from "react";
 import { AppBreadCrumb } from "@/components/app-breadcrumb";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
 import { RevenueChart } from "@/features/dashboard/components/revenue-chart";
 import { SalesChannelChart } from "@/features/dashboard/components/sales-channel-chart";
 import { TopProducts } from "@/features/dashboard/components/top-products";
@@ -10,13 +9,10 @@ import inventoryData from "@/features/inventory/data/inventory.json";
 import orgsData from "@/features/organization/data/organizations.json";
 import usersData from "@/features/users/data/users.json";
 import {
-	BarChart3,
 	Building2,
-	Calendar,
 	Download,
 	FileSpreadsheet,
 	Filter,
-	Layers,
 	TrendingUp,
 	Users,
 	Warehouse,
@@ -31,7 +27,7 @@ export function ReportsPage() {
 	const totalOrgs = orgsData.length;
 	const totalUsers = usersData.length;
 
-	const handleExport = (type: string) => {
+	const handleExport = (_type: string) => {
 		setExporting(true);
 		setTimeout(() => setExporting(false), 1500);
 	};
